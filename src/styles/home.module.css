@@ -1,0 +1,23 @@
+#container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    height: 100vh;
+    width: 100vw;
+    background: linear-gradient(rgba(0,0,0,0.9), rgba(100,84,33,0.7));
+}
+
+#container .card {
+    background: #000;
+    opacity: 75%;
+    border-radius: 5px;
+    padding: 100px;
+    text-align: center;
+}
+
+#container .card h2, h3 {
+    color: #fff;
+    font-size: 2rem;
+}
+
