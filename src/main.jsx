@@ -4,10 +4,16 @@ import './index.css'
 import { RouterProvider } from 'react-router-dom'
 import router from './router'
 import '@fortawesome/fontawesome-svg-core/styles.css';
+import { AuthProvider } from './context/AuthContext.jsx'
+import { ToastContainer } from 'react-toastify'
+import 'react-toastify/dist/ReactToastify.min.css';
 
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
-   <RouterProvider router={router}/>
+    <AuthProvider>
+      <RouterProvider router={router}/>
+      <ToastContainer/>
+    </AuthProvider>
   </StrictMode>
 )

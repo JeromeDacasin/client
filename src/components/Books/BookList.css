@@ -1,0 +1,45 @@
+.table-container {
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border-radius: 10px;
+    padding: 20px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.book-table {
+    width: 70vw;
+    background: #CAC8C5;
+    border-radius: 10px;
+    border-collapse: collapse;
+}
+
+.book-table th, .book-table td {
+    padding: 12px;
+    border: 1px solid #D3D2CF; 
+    background: rgba(255, 255, 255, 0.1);
+    color: #000;
+}
+
+.book-table th {
+    font-weight: bold;
+    color: #000;
+}
+
+.actions {
+    display: flex;
+    gap: 10px;
+
+
+}
+
+.actions .edit, .actions .show, .actions .trash {
+    color:#000;
+}
+
+.actions a:hover {
+    transform: scale(2);
+    content: attr(title);
+}
+

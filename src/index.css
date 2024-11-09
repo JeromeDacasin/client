@@ -1,4 +1,4 @@
-* {
+/* * {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
@@ -34,6 +34,9 @@ body {
   place-items: center;
   min-width: 320px;
   min-height: 100vh;
+  background: url('./assets/background.jpg') no-repeat center center/cover fixed; 
+  
+  height: 100%;
 }
 
 h1 {
@@ -71,11 +74,20 @@ button:focus-visible {
   button {
     background-color: #f9f9f9;
   }
+} */
+
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
 }
 
 body {
-  margin: 0; 
-  height: 100vh; 
-  background: url('./assets/background.jpg') no-repeat center center/cover; 
+  background: url('./assets/background.jpg') no-repeat center center/cover fixed; 
+  /* padding-top: 100px; */
 }
 
+:root {
+  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+}

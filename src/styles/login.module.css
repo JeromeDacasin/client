@@ -60,6 +60,13 @@
     text-decoration: underline;
 }
 
+.error {
+    color: #ff0000;
+    text-align: center;
+    padding-top: 10px;
+}
+
+
 @media (max-width: 768px) {
     #container h1{
         font-size: 2rem;
