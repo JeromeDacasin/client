@@ -12,13 +12,11 @@
     width: 70vw;
     background: #CAC8C5;
     border-radius: 10px;
-    border-collapse: collapse;
 }
 
 .book-table th, .book-table td {
     padding: 12px;
     border: 1px solid #D3D2CF; 
-    background: rgba(255, 255, 255, 0.1);
     color: #000;
 }
 
@@ -35,11 +33,48 @@
 }
 
 .actions .edit, .actions .show, .actions .trash {
-    color:#000;
+    transition: all 0.3s ease-in-out;
+    /* background: #fff; */
+    padding: 0.3rem;
 }
 
-.actions a:hover {
-    transform: scale(2);
+.actions button:hover {
+    transform: scale(1.4);
+    text-shadow: 0 0 8px rgba(0, 123, 255, 0.8);
     content: attr(title);
 }
 
+
+.create {
+    display: flex;
+    justify-content: right;
+    margin-bottom: 20px;
+}
+
+.create .btn {
+    padding: 10px;
+    border-radius: 10px;
+    background: #0D6EFD;
+    color: #fff;
+}
+
+.create button:hover {
+    cursor: pointer;
+    background-color: #338AFD;
+    /* color: lightblue; */
+}
+
+.status-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2rem;
+}
+
+.status-icon.yes {
+    color: #198754;
+}
+
+.status-icon.no {
+    color: #DC3545;
+}

@@ -36,10 +36,10 @@ const router = createBrowserRouter([
                     {
                         path: "/books",
                         element: <Books/>,
-                        children: [{
-                            path: "/books/:bookId",
-                            element: <Books/>       
-                        }]
+                        // children: [{
+                        //     path: "/books/:bookId",
+                        //     element: <BookModal/>       
+                        // }]
                     } 
                 ]
             },

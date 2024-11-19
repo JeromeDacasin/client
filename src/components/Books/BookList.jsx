@@ -1,43 +1,27 @@
-import { useState, useEffect } from "react";
 import { useReactTable, getCoreRowModel, flexRender } from "@tanstack/react-table";
-import { fetchBooks } from "../../api/booksApi";
-import { showAlertError } from "../../utils/toastify";
 import './BookList.css';
-import { fetchAuthors } from "../../api/authorsApi";
 import CurrencyFormat from "../../utils/MoneyFormat";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { Link } from "react-router-dom";
-import { faEdit, faEye, faTrash } from "@fortawesome/free-solid-svg-icons";
+import { faEdit, faEye, faTrash, faCheckCircle, faXmarkCircle } from "@fortawesome/free-solid-svg-icons";
+import BookModal from "./BookModal";
+import { useState } from "react";
 
-
-
-const BookList = () => {
+const BookList = ({books}) => {
     
-    const [books, setBooks] = useState([]);
-    const [authors, setAuthors] = useState([]);
-    const [isLoading, setIsLoading] = useState(true);
+    const [openModal, setOpenModal] = useState(false)
+    const [book, setBook] = useState(null)
+    const [action, setAction] = useState(null)
 
-    useEffect( () => {
+    const handleOpenModal = (type, id) => {
+        setBook(id)
+        setOpenModal(true)
+        setAction(type)
+    }
 
-        const getData = async () => {
-            try {
-                setIsLoading(true);
-                const books = await fetchBooks();
-                const authors = await fetchAuthors();
-                setBooks(books);
-                setAuthors(authors);
-    
-            } catch(error) {
-                showAlertError(error);
-            } finally {
-                setIsLoading(false);
-            }   
-        }
+    const handleCloseModal = () => {
+        setOpenModal(false)
+    }
 
-        getData();
-    }, []);
-
-    // const data = useMemo( () => books, []);
 
     /** @type import('@tanstack/react-table').ColumnDef<any>*/
     const columns = [
@@ -77,16 +61,35 @@ const BookList = () => {
         },
         {
             header: 'STATUS',
-            accessorKey: 'status'
+            accessorKey: 'status',
+            cell: ({ getValue }) => {
+                const status = getValue();
+                return (
+                    <span className={`status-icon ${status === 'Yes' ? 'yes' : 'no'}`}>
+                        {
+                            status.toLowerCase() === 'yes' ? (
+                                <FontAwesomeIcon icon={faCheckCircle}/>
+                            ) : (
+                                <FontAwesomeIcon icon={faXmarkCircle}/>
+                            )
+                        }
+                    </span>
+                )
+            }
         }, 
         {
             header: 'ACTION',
             cell: cell => {
+                const bookId = cell.row.original.id;
                 return (
                     <div className="actions">
-                        <Link to="/" className="edit"><FontAwesomeIcon icon={faEdit} title="edit" /></Link>
-                        <Link to="/" className="show"><FontAwesomeIcon icon={faEye} title="show" /></Link>
-                        <Link to="/" className="trash"><FontAwesomeIcon icon={faTrash} title="delete" /></Link>
+                        <button className="edit" onClick={() =>  { handleOpenModal('edit', bookId) }}>
+                            <FontAwesomeIcon icon={faEdit} title="edit"/>
+                        </button>
+                        <button className="show" onClick={() =>  { handleOpenModal('show', bookId) }}>
+                            <FontAwesomeIcon icon={faEye} title="show" />
+                        </button>
+                        <button to="/" className="trash"><FontAwesomeIcon icon={faTrash} title="delete" /></button>
                     </div>
                 )
             }
@@ -97,7 +100,6 @@ const BookList = () => {
 
     const table = useReactTable({data: books, columns, getCoreRowModel: getCoreRowModel()})
 
-    if (isLoading) return <p>Loading...</p>;
     
     return (
         <div id="book-management">
@@ -113,6 +115,10 @@ const BookList = () => {
                 <h3>List of Books</h3>
             </div>
             <div className="table-container">
+                <div className="create">
+                    <button className="btn" onClick={() => handleOpenModal('create')}>Create New Book</button>
+                </div>
+                <div>
                 <table className="book-table">
                     <thead>
                         {table.getHeaderGroups().map(headerGroup => (
@@ -137,7 +143,10 @@ const BookList = () => {
                         ))}
                     </tbody>
                 </table>
+                </div>
+                
             </div>
+            {openModal && <BookModal closeModal={() => handleCloseModal()} id={book} action={action}/>}
         </div>
     )
 }

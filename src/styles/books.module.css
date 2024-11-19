@@ -4,6 +4,6 @@
     justify-content: center;
     min-height: 100vh;
     padding-top: 100px;
-    /* height: 60px; */
+    background: linear-gradient(rgba(0,0,0,0.9), rgba(100,84,33,0.7));
 }
 
