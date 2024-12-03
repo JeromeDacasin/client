@@ -2,7 +2,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100%; /* Full container height */
+    height: 100%; 
 }
 
 .spinner {

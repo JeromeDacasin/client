@@ -1,21 +1,26 @@
 import { useReactTable, getCoreRowModel, flexRender } from "@tanstack/react-table";
 import './BookList.css';
-import CurrencyFormat from "../../utils/MoneyFormat";
+import CurrencyFormat from "../../../utils/MoneyFormat";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEdit, faEye, faTrash, faCheckCircle, faXmarkCircle } from "@fortawesome/free-solid-svg-icons";
-import BookModal from "./BookModal";
+import BookModal from "../BookModal/BookModal";
 import { useState } from "react";
+import { useData } from "../../../context/DataContext";
+import DeleteModal from "../../Modal/DeleteModal";
 
-const BookList = ({books}) => {
+const BookList = ({books, onBookUpdate}) => {
     
     const [openModal, setOpenModal] = useState(false)
     const [book, setBook] = useState(null)
     const [action, setAction] = useState(null)
+    const { authors, departments } = useData();
 
     const handleOpenModal = (type, id) => {
         setBook(id)
         setOpenModal(true)
         setAction(type)
+        console.log(type);
+        console.log(openModal);
     }
 
     const handleCloseModal = () => {
@@ -65,9 +70,9 @@ const BookList = ({books}) => {
             cell: ({ getValue }) => {
                 const status = getValue();
                 return (
-                    <span className={`status-icon ${status === 'Yes' ? 'yes' : 'no'}`}>
+                    <span className={`status-icon ${status == 1 ? 'yes' : 'no'}`}>
                         {
-                            status.toLowerCase() === 'yes' ? (
+                            status == 1 ? (
                                 <FontAwesomeIcon icon={faCheckCircle}/>
                             ) : (
                                 <FontAwesomeIcon icon={faXmarkCircle}/>
@@ -89,7 +94,11 @@ const BookList = ({books}) => {
                         <button className="show" onClick={() =>  { handleOpenModal('show', bookId) }}>
                             <FontAwesomeIcon icon={faEye} title="show" />
                         </button>
-                        <button to="/" className="trash"><FontAwesomeIcon icon={faTrash} title="delete" /></button>
+                        <button className="trash" onClick={() => { handleOpenModal('delete', bookId) }}>
+                            <FontAwesomeIcon icon={faTrash} title="delete" />
+                        </button>
+
+                        
                     </div>
                 )
             }
@@ -100,16 +109,26 @@ const BookList = ({books}) => {
 
     const table = useReactTable({data: books, columns, getCoreRowModel: getCoreRowModel()})
 
-    
     return (
         <div id="book-management">
             <div className="search-bar">
                 <h3>Search / Edit a Book Here</h3>
-                <select name="author" id="author-select">
-                    <option value="1"></option>
-                    <option value="2"></option>
-                    <option value="3"></option>
-                </select>
+               { authors && <select name="author" id="author-select">
+                    { 
+                        authors.map( author => (
+                            <option value={author.id} key={author.id}>{author.first_name} {author.last_name}</option>
+                        ))
+                    }
+                </select>}
+
+
+                { departments && <select name="department" id="department-select">
+                    { 
+                        departments.map( department => (
+                            <option value={department.id} key={department.id}>{department.name}</option>
+                        ))
+                    }
+                </select>}
             </div>
             <div>
                 <h3>List of Books</h3>
@@ -146,7 +165,8 @@ const BookList = ({books}) => {
                 </div>
                 
             </div>
-            {openModal && <BookModal closeModal={() => handleCloseModal()} id={book} action={action}/>}
+            {openModal && action !== 'delete' && <BookModal closeModal={() => handleCloseModal()} id={book} action={action} onUpdate={onBookUpdate}/>}
+            {openModal && action === 'delete' && <DeleteModal id={book} closeModal={() => handleCloseModal()}/>}
         </div>
     )
 }

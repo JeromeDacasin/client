@@ -5,7 +5,7 @@ export default class CurrencyFormat {
     }
 
     pesoSign() {
-        this.number = `₱\u00A0${this.number.getValue().toFixed(2)}`;
+        this.number = typeof(this.number) !== 'string' ? `₱\u00A0${this.number.getValue()}` : `₱\u00A0${this.number.getValue().toFixed(2)}`;
         return this;
     }
 

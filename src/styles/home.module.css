@@ -4,7 +4,7 @@
     justify-content: center;
     flex-direction: column;
     min-height: 100vh;
-    background: linear-gradient(rgba(0,0,0,0.9), rgba(100,84,33,0.7));
+    /* background: linear-gradient(rgba(0,0,0,0.9), rgba(100,84,33,0.7)); */
 }
 
 #container .card {

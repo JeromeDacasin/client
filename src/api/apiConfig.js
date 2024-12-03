@@ -2,11 +2,11 @@
 
 const token = JSON.parse(localStorage.getItem('authToken'));
 
-const headerConfig = {
+export const headerConfig = {
     headers: {
         Authorization: `Bearer ${token}`,
         'Content-Type': 'application/json'
     }
 }
 
-export default headerConfig;
+export const viteURI = import.meta.env.VITE_API_URI;

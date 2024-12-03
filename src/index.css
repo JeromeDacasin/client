@@ -84,7 +84,7 @@ button:focus-visible {
 }
 
 body {
-  background: url('./assets/background.jpg') no-repeat center center/cover fixed; 
+  background: #E0F7FA;  
   /* padding-top: 100px; */
 }
 
