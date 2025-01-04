@@ -1,13 +1,11 @@
-#container {
+.home {
     display: flex;
     align-items: center;
     justify-content: center;
     flex-direction: column;
-    min-height: 100vh;
-    /* background: linear-gradient(rgba(0,0,0,0.9), rgba(100,84,33,0.7)); */
 }
 
-#container .card {
+.home .card {
     background: #000;
     opacity: 75%;
     border-radius: 10px;
@@ -15,19 +13,12 @@
     text-align: center;
 }
 
-#container .card h2, h3 {
+.home .card h2, .home .card h3 {
     color: #fff;
     font-size: 2rem;
 }
 
-#container .card h2 {
+.home .card h2 {
     text-transform: uppercase;
 }
 
-/* @media (max-width: 600px) {
-    
-    #container .card h2, h3 {
-        font-size: 1.1rem;
-    }
-}
- */

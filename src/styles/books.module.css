@@ -1,9 +1,0 @@
-#container {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    min-height: 100vh;
-    padding-top: 100px;
-    background: linear-gradient(rgba(0,0,0,0.9), rgba(100,84,33,0.7));
-}
-

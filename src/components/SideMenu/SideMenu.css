@@ -1,0 +1,67 @@
+#side-menu {
+    height: 100%;
+    width: 250px;
+    background: rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(10px);
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.3);
+    padding: 20px 0;
+}
+
+.side-menu-image {
+    margin-top: 10px;
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.side-menu-image img {
+    height: 80px;
+    filter:  drop-shadow(0 2px 4px rgba(0, 0, 0, 1));
+    /* align-items: center; */
+}
+
+.side-menu-list {
+   height: auto;
+   margin: 0;
+   padding: 0;
+   width: 100%;
+
+}
+
+.side-menu-list .list {
+    display: flex;
+    width: 100%;
+    height: 50px;
+    list-style-type: none;
+    margin: 0;
+    justify-content: center;
+    align-items: center;
+    font-weight: 600;
+    font-size: 1rem;
+    transition: backround 0.3s ease, transform 0.2s ease;
+    background: rgba(255, 255, 255, 0.1);
+    text-decoration: none;
+    color: #000;
+}
+
+.side-menu-list .list:hover {
+    cursor: pointer;
+    background: rgba(255, 255, 255, 0.25);
+    transform: translateY(-3px);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+.side-menu-list .list .side-menu-icon {
+    flex: 50%;
+    display: grid;
+    place-items: center;
+}
+
+.side-menu-list .list .side-menu-title {
+    flex: 70%;
+    margin-left: -25px;
+}
+side-menu-list .list:hover .side-menu-icon {
+    opacity: 1;
+}

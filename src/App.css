@@ -1,0 +1,60 @@
+.layout {
+    display: flex;
+    width: 100vw;
+    height: 100vh;
+}
+
+
+/* #side-menu {
+    width: 15%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+
+} */
+
+.pages {
+    flex: 1;
+    height: 100%;
+    padding: 20px;
+    overflow-y: auto;
+    background-color: #cdcdd5;
+}
+
+@media (min-width: 1024px) {
+    .burger-menu {
+        display: none;
+    }
+
+    #side-menu {
+        width: 250px;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        position: relative;
+    
+    }
+}
+
+@media (max-width: 768px) {
+    #side-menu {
+        width: 200px;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        position: relative;
+    
+    }
+}
+
+@media (max-width: 320px) {
+    #side-menu {
+        width: 100%;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        position: relative;
+    
+    }
+}

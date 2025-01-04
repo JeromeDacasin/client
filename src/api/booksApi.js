@@ -2,12 +2,12 @@ import axios from "axios";
 import {headerConfig, viteURI} from "./apiConfig";
 
 
-export const fetchBooks = async paginate => {
+export const fetchBooks = async payload => {
     const response = await axios.get(`${viteURI}/books`, {
-        params: paginate,
+        params: payload,
         ...headerConfig
     });
-    return response.data.data;
+    return response.data;
 }
 
 export const fetchBook = async id => {
@@ -18,7 +18,7 @@ export const fetchBook = async id => {
 export const updateBook = async payload => {
     const { id } = payload
     const response = await axios.put(`${viteURI}/books/${id}`, payload , headerConfig);
-    return response.data
+    return response.data;
 }
 
 export const createBook = async payload => {
@@ -30,3 +30,4 @@ export const deleteBook = async id => {
     const response = await axios.delete(`${viteURI}/books/${id}`, headerConfig);
     return response.data;
 }
+

@@ -1,38 +1,39 @@
-import { useReactTable, getCoreRowModel, flexRender } from "@tanstack/react-table";
 import './BookList.css';
 import CurrencyFormat from "../../../utils/MoneyFormat";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEdit, faEye, faTrash, faCheckCircle, faXmarkCircle } from "@fortawesome/free-solid-svg-icons";
 import BookModal from "../BookModal/BookModal";
 import { useState } from "react";
-import { useData } from "../../../context/DataContext";
+// import { useData } from "../../../context/DataContext";
 import DeleteModal from "../../Modal/DeleteModal";
+import Table from "../../Table/Table";
 
-const BookList = ({books, onBookUpdate}) => {
-    
-    const [openModal, setOpenModal] = useState(false)
-    const [book, setBook] = useState(null)
-    const [action, setAction] = useState(null)
-    const { authors, departments } = useData();
 
+const BookList = ({books, loading, onBookUpdate, onSearchChange}) => {
+    const [openModal, setOpenModal] = useState(false);
+    const [book, setBook] = useState(null);
+    const [action, setAction] = useState(null);
+    // const { authors, departments } = useData();
     const handleOpenModal = (type, id) => {
         setBook(id)
         setOpenModal(true)
         setAction(type)
-        console.log(type);
-        console.log(openModal);
     }
 
     const handleCloseModal = () => {
         setOpenModal(false)
     }
 
+    const handleSearchInput = e => {
+        onSearchChange(e.target.value)
+    }
 
     /** @type import('@tanstack/react-table').ColumnDef<any>*/
     const columns = [
         {
             header: 'ID',
-            accessorKey: 'id'
+            accessorKey: 'id',
+            cell: ({row}) => row.index + 1
         },
         {
             header: 'NAME',
@@ -97,8 +98,6 @@ const BookList = ({books, onBookUpdate}) => {
                         <button className="trash" onClick={() => { handleOpenModal('delete', bookId) }}>
                             <FontAwesomeIcon icon={faTrash} title="delete" />
                         </button>
-
-                        
                     </div>
                 )
             }
@@ -107,11 +106,9 @@ const BookList = ({books, onBookUpdate}) => {
 
     ];
 
-    const table = useReactTable({data: books, columns, getCoreRowModel: getCoreRowModel()})
-
     return (
         <div id="book-management">
-            <div className="search-bar">
+            {/* <div className="search-bar">
                 <h3>Search / Edit a Book Here</h3>
                { authors && <select name="author" id="author-select">
                     { 
@@ -129,42 +126,29 @@ const BookList = ({books, onBookUpdate}) => {
                         ))
                     }
                 </select>}
-            </div>
-            <div>
-                <h3>List of Books</h3>
-            </div>
+            </div> */}
+             
+
             <div className="table-container">
-                <div className="create">
-                    <button className="btn" onClick={() => handleOpenModal('create')}>Create New Book</button>
+                <div className="books-input">
+                    <div>
+                        <input className="search-books" type="text" placeholder="Search..." onChange={handleSearchInput} />
+                    </div>
+                    <div className="create">
+                        <button className="btn" onClick={() => handleOpenModal('create')}>Create New Book</button>
+                    </div>
                 </div>
-                <div>
-                <table className="book-table">
-                    <thead>
-                        {table.getHeaderGroups().map(headerGroup => (
-                            <tr key={headerGroup.id}>
-                                {headerGroup.headers.map(header => (
-                                    <th key={header.id}>
-                                        {flexRender(header.column.columnDef.header, header.getContext())}
-                                    </th>
-                                ))}
-                            </tr>
-                        ))}
-                    </thead>
-                    <tbody>
-                        {table.getRowModel().rows.map(row => (
-                            <tr key={row.id}>
-                                {row.getVisibleCells().map(cell => (
-                                    <td key={cell.id}>
-                                        {flexRender(cell.column.columnDef.cell, cell.getContext())}
-                                    </td>
-                                ))}
-                            </tr>
-                        ))}
-                    </tbody>
-                </table>
-                </div>
+        
+                {   
+                    !loading && 
+                    books !== null &&           
+                    <div>
+                        <Table columns={columns} data={books.data}/>
+                    </div>
+                }
                 
             </div>
+            
             {openModal && action !== 'delete' && <BookModal closeModal={() => handleCloseModal()} id={book} action={action} onUpdate={onBookUpdate}/>}
             {openModal && action === 'delete' && <DeleteModal id={book} closeModal={() => handleCloseModal()}/>}
         </div>

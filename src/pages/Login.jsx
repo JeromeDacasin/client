@@ -3,11 +3,13 @@ import style from './../styles/login.module.css';
 import { useAuth } from '../context/AuthContext.jsx';
 import { useNavigate } from 'react-router-dom';
 import { showAlertError } from '../utils/toastify';
+import logo from './../assets/logo.png';
 const Login = () => {
 
     const { login } = useAuth();
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
+    const [error, setError]       = useState(false);
     const navigate = useNavigate();
 
     const payload = {
@@ -15,49 +17,70 @@ const Login = () => {
         password
     }
     
+    
     const handleLogin = async e => {
         e.preventDefault()
         const response = await login(payload);
         
         if (response.status !== 200) {
             showAlertError(response.data.message)
+            setError(true);
             return
         }
+        setError(false);
         navigate('/home')
     }
    
 
     return (
-        <div id={style.container}>
-            
-            <div className={`${style['form-wrap']}`}>
-            <h1>ADMIN LOGIN</h1>
-            
-            <form onSubmit={handleLogin}>
-                <div>
-                    <label htmlFor="">Username</label>
-                    <input type="text" placeholder='Please Input Your Username' required
-                        id='username'
-                        onChange={e => setUsername(e.target.value)}
-                    />
+        <div className={style.container}>
+            <div className={`${style['logo-section']}`}>
+                <div className={style.logo}>
+                    <img src={logo} alt=""/>
+                    <h2>SCC Library Management</h2>
                 </div>
-                <div>
-                    <label htmlFor="">Password</label>
-                    <input type="password" placeholder='Please Input Your Password' required
-                        id='password'
-                        onChange={e => setPassword(e.target.value)}
-                    />
-                </div>
-                <button type="submit" className={style.btn}>Submit</button>
-            </form>
-        
-            <div className={`${style['button-text']}`}>
-                <a href="">Forgot Password</a>
-                <a href="">New to this website? Sign Up</a>
             </div>
+            <div className={`${style['form-section']}`}>
+                <div className={`${style['logo-inside']}`}>
+                    <img src={logo} alt=""/>
+                    <h2>SCC Library Management</h2>
+                </div>
 
-            </div>
-            
+                <div className={`${style['form-wrap']}`}>
+                    <h1>LOGIN</h1>
+                    <form onSubmit={handleLogin} autoComplete='off'>
+                        <div className={`${style['input-container']}`}>
+                            <input type="text" 
+                                placeholder=" " 
+                                required
+                                id='username'
+                                className={error ? `${style['input-error']}` : ''}
+                                onChange={e => setUsername(e.target.value)}
+                            />
+                            <label htmlFor="">Username</label>
+                        </div>
+                        <div className={`${style['input-container']}`}>
+                            <input type="password" 
+                                placeholder=" "  
+                                required
+                                id='password'
+                                className={error ? `${style['input-error']}` : ''}
+                                onChange={e => setPassword(e.target.value)}
+                            />
+                            <label htmlFor="">Password</label>
+                        </div>
+                        <div>
+                        { error && <div className={style.credentials}><p>Invalid Credentials</p></div> }
+                        <button type="submit" className={`${style['submit-btn']}`}>Submit</button>
+                        </div>
+                    </form>
+                
+                    <div className={style.links}>
+                        <a href="">Forgot Password</a>
+                        <a href="">New to this website? Sign Up</a>
+                    </div>
+                </div>
+            </div>        
         </div>
     )
 }
