@@ -1,6 +1,8 @@
 // import { useState } from "react"
 // import { fetchBook } from "../api/booksApi";
 
+import { useState } from "react";
+
 
 // const useModal = () => {
 //     const [isOpen, setIsOpen] = useState(false);
@@ -45,3 +47,33 @@
 // }
 
 // export default useModal;
+
+
+
+const useModal = () => {
+    const [id, setId] = useState(null);
+    const [action, setAction] = useState(null);
+    const [openModal, setOpenModal] = useState(null);
+
+    const handleOpenModal = (action, id) => {
+        setId(id);
+        setAction(action);
+        setOpenModal(true);
+    }
+
+    const handleCloseModal = () => {
+        setOpenModal(false)
+    }
+
+    return {
+        id,
+        action,
+        openModal,
+        handleOpenModal,
+        handleCloseModal
+    }
+
+}
+
+
+export default useModal;

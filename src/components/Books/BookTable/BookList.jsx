@@ -5,7 +5,7 @@ import { faEdit, faEye, faTrash, faCheckCircle, faXmarkCircle } from "@fortaweso
 import BookModal from "../BookModal/BookModal";
 import { useState } from "react";
 // import { useData } from "../../../context/DataContext";
-import DeleteModal from "../../Modal/DeleteModal";
+import DeleteModal from "../../Modal/DeleteModal/DeleteModal";
 import Table from "../../Table/Table";
 
 
@@ -89,13 +89,13 @@ const BookList = ({books, loading, onBookUpdate, onSearchChange}) => {
                 const bookId = cell.row.original.id;
                 return (
                     <div className="actions">
-                        <button className="edit" onClick={() =>  { handleOpenModal('edit', bookId) }}>
+                        <button className="edit" onClick={() =>  { handleOpenModal('Edit', bookId) }}>
                             <FontAwesomeIcon icon={faEdit} title="edit"/>
                         </button>
-                        <button className="show" onClick={() =>  { handleOpenModal('show', bookId) }}>
+                        <button className="show" onClick={() =>  { handleOpenModal('Show', bookId) }}>
                             <FontAwesomeIcon icon={faEye} title="show" />
                         </button>
-                        <button className="trash" onClick={() => { handleOpenModal('delete', bookId) }}>
+                        <button className="trash" onClick={() => { handleOpenModal('Delete', bookId) }}>
                             <FontAwesomeIcon icon={faTrash} title="delete" />
                         </button>
                     </div>
@@ -129,7 +129,7 @@ const BookList = ({books, loading, onBookUpdate, onSearchChange}) => {
             </div> */}
              
 
-            <div className="table-container">
+            <div className="management-table">
                 <div className="books-input">
                     <div>
                         <input className="search-books" type="text" placeholder="Search..." onChange={handleSearchInput} />
@@ -143,7 +143,7 @@ const BookList = ({books, loading, onBookUpdate, onSearchChange}) => {
                     !loading && 
                     books !== null &&           
                     <div>
-                        <Table columns={columns} data={books.data}/>
+                        <Table columns={columns} data={books}/>
                     </div>
                 }
                 

@@ -19,7 +19,9 @@
     height: 100%;
     padding: 20px;
     overflow-y: auto;
-    background-color: #cdcdd5;
+    background: linear-gradient(to right, #E5E1DA, #A7D8C0, #7DA8A1);
+    /* background: linear-gradient(to right, #E5E1DA, #D4C7B7, #E5E1DA); */
+
 }
 
 @media (min-width: 1024px) {

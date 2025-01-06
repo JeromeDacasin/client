@@ -10,7 +10,6 @@ import { showAlertSuccess } from '../../../utils/toastify'
 const BookModal = ({ closeModal, id, action, onUpdate }) => {
     
     const { authors, departments }  = useData();
-    
     const [edit, setEdit] = useState(false);
     const [isLoading, setIsLoading] = useState(true);
     const [data, setData] = useState({
@@ -27,7 +26,7 @@ const BookModal = ({ closeModal, id, action, onUpdate }) => {
     const handleSave = (e) => {
         e.preventDefault()
 
-        if (action === 'edit') {
+        if (action === 'Edit') {
             const updateData = async data => {
 
                 try {
@@ -47,7 +46,7 @@ const BookModal = ({ closeModal, id, action, onUpdate }) => {
             updateData(data)
         } 
 
-        if (action === 'create') 
+        if (action === 'Create') 
         {
             const createData = async data => {
                 try {
@@ -72,7 +71,7 @@ const BookModal = ({ closeModal, id, action, onUpdate }) => {
     const updatedName = (typeId, type) => {
         let name;
         if (type === 'department') {
-            const department = departments.find(department => department.id == typeId)    
+            const department = departments.data.find(department => department.id == typeId)    
             name = department.name;
         } 
         
@@ -92,7 +91,7 @@ const BookModal = ({ closeModal, id, action, onUpdate }) => {
     }
 
     useEffect(() => {
-        if (id && action !== 'create') {
+        if (id && action !== 'Create') {
             const fetchData = async () => {
 
                 try {
@@ -110,13 +109,13 @@ const BookModal = ({ closeModal, id, action, onUpdate }) => {
             fetchData()
         } 
 
-        if (action === 'show') {
+        if (action === 'Show') {
             setEdit(true)
         }
 
     }, [id, action])
 
-    if (isLoading && action !== 'create') {
+    if (isLoading && action !== 'Create') {
         return (
             <div className="modal-container">
                 <div className="modal">
@@ -179,7 +178,7 @@ const BookModal = ({ closeModal, id, action, onUpdate }) => {
                                 value={data.department_id}
                             >
                                 {
-                                    departments.map( department => (
+                                    departments.data.map( department => (
                                         <option value={department.id} key={department.id}>{department.name}</option>
                                     ))
                                 }
@@ -210,7 +209,7 @@ const BookModal = ({ closeModal, id, action, onUpdate }) => {
                             <option value={1}>Available</option>
                         </select>
                     </div>
-                    {   action !== 'show' && 
+                    {   action !== 'Show' && 
                         <button 
                             className="btn" 
                             type='submit'

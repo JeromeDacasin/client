@@ -14,7 +14,6 @@ const Books = () => {
     const [initialLoading, setInitialLoading] = useState(true);
     const debounceSearch = useDebounce(search, 1000);
 
-
     const handleUpdateBook = (updatedBook) => {
         setBooks(prevBooks => ({
             ...prevBooks,

@@ -1,9 +1,9 @@
 
-import { deleteBook } from '../../api/booksApi';
-import { showAlertSuccess } from '../../utils/toastify';
+import { deleteBook } from '../../../api/booksApi';
+import { showAlertSuccess } from '../../../utils/toastify';
 import './DeleteModal.css';
-import { useLoading } from '../../hooks/useLoading';
-import Loader from '../Loader/Loader';
+import { useLoading } from '../../../hooks/useLoading';
+import Loader from '../../Loader/Loader';
 
 
 const DeleteModal = ({closeModal, id}) => {
