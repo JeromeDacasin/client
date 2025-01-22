@@ -4,20 +4,10 @@
     height: 100vh;
 }
 
-
-/* #side-menu {
-    width: 15%;
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-    position: relative;
-
-} */
-
 .pages {
     flex: 1;
     height: 100%;
-    padding: 20px;
+    /* padding: 20px; */
     overflow-y: auto;
     background: linear-gradient(to right, #E5E1DA, #A7D8C0, #7DA8A1);
     /* background: linear-gradient(to right, #E5E1DA, #D4C7B7, #E5E1DA); */

@@ -1,0 +1,14 @@
+.borrow-page {
+    display: flex;
+    justify-content: center;
+    min-height: 100vh;
+    padding-top: 30px;
+}
+
+.borrow-title {
+    text-transform: uppercase;
+}
+
+.cell {
+    text-align: center;
+}

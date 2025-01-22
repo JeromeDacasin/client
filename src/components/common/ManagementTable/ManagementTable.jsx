@@ -22,6 +22,7 @@ const ManagementTable = ({
 
     return (
         <div className="management-table">
+            <h2></h2>
             <div className="table-options">
                 <div className="search">
                     <SearchInput title={title} onChange={onSearch}/>

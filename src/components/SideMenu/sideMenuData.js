@@ -1,4 +1,4 @@
-import { faHouse, faBook, faFolderTree, faUserPen, faGraduationCap, faChalkboardTeacher, faBookOpen, faPesoSign  } from "@fortawesome/free-solid-svg-icons"
+import { faHouse, faBook, faFolderTree, faUserPen, faGraduationCap, faChalkboardTeacher, faBookOpen, faPesoSign, faScroll, faSync, faPencilAlt  } from "@fortawesome/free-solid-svg-icons"
 
 export const sideMenuData = [
     {
@@ -40,7 +40,23 @@ export const sideMenuData = [
     {
         title: 'Fines',
         icon: faPesoSign,
-        link: '/fines'
+        link: '/penalties'
     },
+    {
+        title: 'Requests',
+        icon: faPencilAlt,
+        link: '/requests'
+    },
+    {
+        title: 'Pendings',
+        icon: faSync,
+        link: '/pendings'
+    },
+    {
+        title: 'Histories',
+        icon: faScroll,
+        link: '/histories'
+    },
+
 
 ]

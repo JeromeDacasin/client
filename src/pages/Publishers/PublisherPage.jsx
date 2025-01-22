@@ -1,72 +1,70 @@
 import { useEffect, useState } from "react";
-import { fetchDepartments } from "../../api/departmentsApi";
+import ManagementTable from "../../components/common/ManagementTable/ManagementTable";
 import { useLoading } from "../../hooks/useLoading";
-import Loader from "../../components/Loader/Loader";
+import { useDebounce } from "../../hooks/useDebounce";
+import { fetchPublishers } from "../../api/publisherApi";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEdit, faEye, faTrash } from "@fortawesome/free-solid-svg-icons";
-import './department.css';
-import ManagementTable from "../../components/common/ManagementTable/ManagementTable";
-import DepartmentForm from "../../components/Departments/DepartmentForm/DepartmentForm";
 import useModal from "../../hooks/useModal";
-import { useDebounce } from "../../hooks/useDebounce";
+import './PublisherPage.css';
+import PublisherForm from "../../components/Publishers/PublisherForm/PublisherForm";
+import Loader from "../../components/Loader/Loader";
 
-
-
-const Department = () => {
+const PublisherPage = () => {
 
     const {id, action, openModal, handleOpenModal, handleCloseModal} = useModal();
+    const [publishers, setPublishers] = useState(null);
     const [loading, setLoading] = useLoading();
-    const [initialLoading, setInitialLoading] = useState(true);
-    const [departments, setDepartments] = useState(null);
+    const [search, setSearch] = useState(null);
     const [page, setPage] = useState(1);
-    const [search, setSearch] = useState("");
+    const [initialLoading, setInitialLoading] = useState(true);
     const debounceSearch = useDebounce(search, 1000);
     let paginate = 1;
 
-    const handleUpdate = updatedDepartment => {
-        setDepartments( prevData => ({
+
+    const handleUpdate = updatedPublisher => {
+        setPublishers( prevData => ({
                 ...prevData,
-                data: prevData.data.map(department => department.id === updatedDepartment.id ? updatedDepartment : department)  
+                data: prevData.data.map(publisher => publisher.id === updatedPublisher.id ? updatedPublisher : publisher)  
         }))
     }
 
     const handleSearch = value => {
-        setSearch(value)
-        setPage(1)
+        setSearch(value);
+        setPage(1);
     }
 
-    useEffect(() => { 
-
+    useEffect(() => {
+        
         let params = {
             paginate,
             page,
             search: debounceSearch
         }
-
+        
         const getData = async () => {
             try {
-                setLoading(true)
-                const response = await fetchDepartments(params);
-                setDepartments(response)
-                setInitialLoading(false)
-                return response;
+                setLoading(true);
+                const response = await fetchPublishers(params);
+                setPublishers(response);
+                setInitialLoading(false);
             } catch (error) {
-                return error
+                return error;
             } finally {
-                setLoading(false)
+                setLoading(false);
             }
         }
+
         getData();
 
-    }, [setLoading, paginate, page, debounceSearch])
-
-
+    }, [setLoading, paginate, page, debounceSearch]);
+    
     /** @type import('@tanstack/react-table').ColumnDef<any>*/
     const columns = [
         {
             header: '#',
             accessorKey: 'id',
-            cell: ({row}) => row.index + 1
+            cell: ({row}) => row.index + 1 + (page - 1) * 10
         },
         {
             header: 'NAME',
@@ -79,16 +77,16 @@ const Department = () => {
         {
             header: 'ACTION',
             cell: cell => {
-                const departmentId = cell.row.original.id
+                const publisherId = cell.row.original.id
                 return (
                     <div className="actions">
-                    <button className="edit" onClick={() =>  { handleOpenModal('Edit', departmentId) }}>
+                    <button className="edit" onClick={() =>  { handleOpenModal('Edit', publisherId) }}>
                         <FontAwesomeIcon icon={faEdit} title="edit"/>
                     </button>
-                    <button className="show" onClick={() =>  { handleOpenModal('Show', departmentId) }}>
+                    <button className="show" onClick={() =>  { handleOpenModal('Show', publisherId) }}>
                         <FontAwesomeIcon icon={faEye} title="show" />
                     </button>
-                    <button className="trash" onClick={() => { handleOpenModal('Delete', departmentId) }}>
+                    <button className="trash" onClick={() => { handleOpenModal('Delete', publisherId) }}>
                         <FontAwesomeIcon icon={faTrash} title="delete" />
                     </button>
                 </div>
@@ -98,27 +96,33 @@ const Department = () => {
     ]
 
     return (
-        <div className="department-page">
+        <div className="publishers-page">
             {
-                initialLoading &&
-                departments === null ? 
-                (<Loader/>) : 
+                initialLoading && 
+                publishers === null ? 
+                (<Loader/>) :
                 (
-                    <ManagementTable 
-                        title='Department' 
-                        data={departments}
+                    <div>
+                        <h1>PUBLISHERS</h1>
+
+                    <ManagementTable
+                        title='Publishers'
+                        data={publishers}
                         columns={columns}
                         loading={loading}
                         onPageChange={ newPage => setPage(newPage)}
                         onCreate={handleOpenModal}
                         onSearch={handleSearch}
-                    />
+                        
+                        />
+                    </div>
                 )
             }
+
             {
-                openModal && 
-                <DepartmentForm 
-                    closeModal={() => {handleCloseModal()}}
+                openModal &&
+                <PublisherForm
+                    closeModal={() => handleCloseModal()}
                     action={action}
                     id={id}
                     onUpdate={handleUpdate}
@@ -126,6 +130,9 @@ const Department = () => {
             }
         </div>
     )
-};
+}
 
-export default Department;
+export default PublisherPage;
+
+
+

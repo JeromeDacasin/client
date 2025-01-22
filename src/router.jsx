@@ -7,7 +7,12 @@ import Books from "./pages/Books/Books";
 import ProtectedRoutes from "./utils/ProtectedRoutes";
 import App from "./App";
 import { PublicRoute } from "./utils/PublicRoute";
-import Department from "./pages/Departments/Department";
+import DepartmentPage from "./pages/Departments/DepartmentPage";
+import AuthorsPage from "./pages/Authors/AuthorsPage";
+import PublisherPage from "./pages/Publishers/PublisherPage";
+import UsersPage from "./pages/Users/UsersPage";
+import PenaltyPage from "./pages/Penalties/PenaltyPage";
+import BorrowedBooksPage from "./pages/BorrowedBooks/BorrowedBooksPage";
 
 const router = createBrowserRouter([
     {
@@ -39,27 +44,47 @@ const router = createBrowserRouter([
                     },
                     {
                         path: "/departments",
-                        element: <Department/>,
+                        element: <DepartmentPage/>,
                     },
                     {
                         path: "/authors",
-                        element: <Books/>,
+                        element: <AuthorsPage/>,
+                    },
+                    {
+                        path: "/librarians",
+                        element: <UsersPage roleId={1} title='Librarian'/>,
                     },
                     {
                         path: "/students",
-                        element: <Books/>,
+                        element: <UsersPage roleId={2} title='Student'/>,
                     },
                     {
                         path: "/teachers",
-                        element: <Books/>,
+                        element: <UsersPage roleId={3} title='Teacher'/>,
+                    },
+                    {
+                        path: "/faculties",
+                        element: <UsersPage roleId={4} title='Faculty'/>,
+                    },
+                    {
+                        path: "/penalties",
+                        element: <PenaltyPage/>,
                     },
                     {
                         path: "/publishers",
-                        element: <Books/>,
+                        element: <PublisherPage/>,
                     },
                     {
-                        path: "/fines",
-                        element: <Books/>,
+                        path: "/requests",
+                        element: <BorrowedBooksPage status='requested'/>, 
+                    },
+                    {
+                        path: "/histories",
+                        element: <BorrowedBooksPage status='returned'/>, 
+                    },
+                    {
+                        path: "/pendings",
+                        element: <BorrowedBooksPage status='ongoing'/>, 
                     },
                      
                 ]
