@@ -25,6 +25,7 @@ export default class CurrencyFormat {
 
 
 
+//TESTING, MAGNO FOLDER
 
 // export const pesoSign = number => {
 //     return `₱\u00A0${number.getValue().toFixed(2)}`;
