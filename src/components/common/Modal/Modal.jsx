@@ -3,7 +3,7 @@
 const Modal = () => {
     return (
         <div className='centralized-modal'>
-            test
+            {/* test */}
         </div>
     );
 };

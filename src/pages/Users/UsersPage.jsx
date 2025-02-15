@@ -119,9 +119,9 @@ const UsersPage = ({roleId, title}) => {
                 (<Loader/>) : 
                 (   
                     <div> 
-                        <h1 className='users-title'>{title}</h1>
+                        {!loading &&  <h1 className='users-title'>{title}</h1>}
                         <ManagementTable 
-                            title='Department' 
+                            title={title} 
                             data={users}
                             columns={columns}
                             loading={loading}

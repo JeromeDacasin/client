@@ -4,26 +4,23 @@ import { useLoading } from '../../../hooks/useLoading';
 import Loader from '../../Loader/Loader';
 import { showAlertSuccess } from '../../../utils/toastify';
 import { useEffect, useState } from 'react';
-import { updatePenalty, createPenalty, fetchPenalty } from '../../../api/penaltyApi';
-import { fetchRoles } from '../../../api/roleApi';
+import { createRole, fetchRole, updateRole } from '../../../api/roleApi';
 
 
 
-
-const PenaltyForm = ({closeModal, action, id, onUpdate}) => {
+const RoleForm = ({closeModal, action, id, onUpdate}) => {
 
     const [loading, setLoading] = useLoading();
     const [edit, setEdit] = useState(false);
-    const [roles, setRoles] = useState("");
     const [data, setData] = useState({
         name: "",
-        role_id: ""
+        description: ""
     });
 
 
     const handleSave = async e => {
         e.preventDefault();
-        const apiCall = action === 'Edit' ? updatePenalty : createPenalty;
+        const apiCall = action === 'Edit' ? updateRole : createRole;
         
          try {
             setLoading(true);
@@ -53,16 +50,11 @@ const PenaltyForm = ({closeModal, action, id, onUpdate}) => {
 
     useEffect(() => {
 
-        const handleFetchPenalty = async id => {
+        const handleFetchRole = async id => {
             try {
                 setLoading(true);
-                if (id) {
-                    const response = await fetchPenalty(id);
-
-                    setData(response.data);
-                }
-                const roleData = await fetchRoles({paginate: 0});
-                setRoles(roleData.data);
+                const response = await fetchRole(id);
+                setData(response.data);
             } catch (error) {
                 return error;
             } finally {
@@ -70,7 +62,7 @@ const PenaltyForm = ({closeModal, action, id, onUpdate}) => {
             }
         } 
 
-        handleFetchPenalty(id);
+        handleFetchRole(id);
 
     }, [setLoading, id]);
 
@@ -91,38 +83,31 @@ const PenaltyForm = ({closeModal, action, id, onUpdate}) => {
                     <div className='form'>
                         <div className='form-header'>
                             <h3>
-                                {action} Penalty Information
+                                {action} Role Information
                             </h3>
                         </div>
                         <div className='form-body'>
                             <form onSubmit={handleSave}>
                                 <div className={formStyles['form-group']}>
-                                    <label htmlFor='fine'>Fine</label>
+                                    <label htmlFor='name'>Name</label>
                                     <input 
                                         onChange={handleChange}
-                                        name='fine'
-                                        value={data.fine}
+                                        name='name'
+                                        value={data.name}
                                         disabled={edit}
 
                                     />
                                 </div>
-                                <div className='form-group'>
-                                    <label htmlFor="role">Role</label>
-                                    { roles && 
-                                        <select 
-                                            onChange={handleChange}
-                                            name="role_id" 
-                                            id="role_id" 
-                                            value={data.role_id || ''}
-                                        >
-                                            <option value="" disabled>Select a role</option> 
-                                            {
-                                                roles.map( role => (
-                                                    <option value={role.id} key={role.id}>{role.name}</option>
-                                                ))
-                                            }
-                                        </select>
-                                    }
+                                <div className={formStyles['form-group']}>
+                                    <label htmlFor='description'>Description</label>
+                                    <textarea 
+                                        onChange={handleChange}
+                                        value={data.description}
+                                        name='description'
+                                        rows={4}
+                                        cols={4}
+                                        disabled={edit}
+                                    />
                                 </div>
                                 {
                                     action !== 'Show' && 
@@ -146,4 +131,4 @@ const PenaltyForm = ({closeModal, action, id, onUpdate}) => {
     )
 }
 
-export default PenaltyForm;
+export default RoleForm;

@@ -4,7 +4,7 @@ import modalStyles from './../../../styles/Modals/modals.module.css';
 import formStyles from './../../../styles/Forms/form.module.css';
 import { useLoading } from '../../../hooks/useLoading';
 import { createUser, fetchUser, updateUser } from '../../../api/usersApi';
-import { showAlertSuccess } from '../../../utils/toastify';
+import { showAlertError, showAlertSuccess } from '../../../utils/toastify';
 
 const UserForm = ({closeModal, action, id, onUpdate, title, roleId}) => {
 
@@ -34,7 +34,9 @@ const UserForm = ({closeModal, action, id, onUpdate, title, roleId}) => {
             onUpdate(data);
             showAlertSuccess(response.message);
         } catch(error) {
-            return error
+           
+            showAlertError(error.response.data.message)
+            return error.response.data.message
         } finally {
             closeModal();
             setLoading(false);
@@ -53,9 +55,13 @@ const UserForm = ({closeModal, action, id, onUpdate, title, roleId}) => {
         const handleFetchAuthor = async id => {
             try {
                 setLoading(true)
-                const response = await fetchUser(id);
-                setData(response.data);
+                
+                if (id) {
+                    const response = await fetchUser(id);
+                    setData(response.data);
+                }
             } catch (error) {
+                showAlertError(error.data)
                 return error
             } finally {
                 setLoading(false)

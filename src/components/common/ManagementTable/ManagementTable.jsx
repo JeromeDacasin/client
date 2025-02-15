@@ -1,4 +1,5 @@
 
+import { useAuth } from "../../../context/AuthContext";
 import Loader from "../../Loader/Loader";
 import Table from "../../Table/Table";
 import CreateButton from "../Button/CreateButton/CreateButton";
@@ -15,6 +16,8 @@ const ManagementTable = ({
     onSearch
 }) => {
 
+    const { user } = useAuth();
+
 
     if (loading) {
         return <Loader/>
@@ -22,14 +25,16 @@ const ManagementTable = ({
 
     return (
         <div className="management-table">
-            <h2></h2>
             <div className="table-options">
                 <div className="search">
                     <SearchInput title={title} onChange={onSearch}/>
                 </div>
-                <div className="create">
-                    <CreateButton title={title} onCreate={onCreate}/>
-                </div>
+                {
+                    title !== 'Books or Name' && ['Admin', 'Librarian'].includes(user.user) &&
+                    <div className="create">
+                        <CreateButton title={title} onCreate={onCreate}/>
+                    </div> 
+                }
             </div>
             
             {

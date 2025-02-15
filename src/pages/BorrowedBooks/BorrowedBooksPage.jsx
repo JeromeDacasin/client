@@ -1,13 +1,14 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import ManagementTable from '../../components/common/ManagementTable/ManagementTable';
-import { useEffect, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import { useLoading } from '../../hooks/useLoading';
 import { useDebounce } from '../../hooks/useDebounce';
 import useModal from '../../hooks/useModal';
-import { faEdit, faEye, faTrash } from '@fortawesome/free-solid-svg-icons';
+import { faBan, faCheck, faEye, faUndo } from '@fortawesome/free-solid-svg-icons';
 import Loader from '../../components/Loader/Loader';
 import { fetchBorrowedBooks } from '../../api/borrowedBooksApi';
 import './BorrowedBooksPage.css';
+import ConfirmationModal from '../../components/Modal/ConfirmationModal/ConfirmationModal';
 
 
 const BorrowedBooksPage = ({roleId, status}) => {
@@ -19,13 +20,26 @@ const BorrowedBooksPage = ({roleId, status}) => {
     const [search, setSearch] = useState(null);
     const [page, setPage] = useState(1);
     const debounceSearch = useDebounce(search, 1000);
+    const message = action === 'Return' ? 'Once confirmed, this book will be marked as returned. Do you want to proceed?' :
+            `Are you sure you want to ${action} this book request ?`;
     let paginate = 1;
 
-    const handleUpdate = updatedBorrowedBooks => {
-        setBorrowedBooks( prevData => ({
-                ...prevData,
-                data: prevData.data.map(user => user.id === updatedBorrowedBooks.id ? updatedBorrowedBooks : user)  
-        }))
+    const handleUpdate = (action, id) => {
+    
+        const filteredBooks = borrowedBooks.data.filter(book => book.id !== id);
+
+        const updatedBooks = {
+            ...borrowedBooks,  
+            data: filteredBooks,  
+        };
+
+    
+        
+        setBorrowedBooks(updatedBooks);
+    
+    
+
+
     }
 
     const handleSearch = value => {
@@ -33,7 +47,7 @@ const BorrowedBooksPage = ({roleId, status}) => {
         setPage(1);
     }
 
-    useEffect(() => {
+    useEffect(() => {   
         
         let params = {
             paginate,
@@ -95,6 +109,13 @@ const BorrowedBooksPage = ({roleId, status}) => {
             )
         },
         {
+            header: 'MUST DATE RETURNED',
+            accessorKey: 'must_return_date',
+            cell:  ({getValue}) => (
+                <div className='cell'>{getValue()}</div>
+            )
+        },
+        {
             header: 'PENALTY',
             accessorKey: 'total_penalty',
             cell:  ({getValue}) => (
@@ -114,21 +135,56 @@ const BorrowedBooksPage = ({roleId, status}) => {
             cell: cell => {
                 const borrowedBookId = cell.row.original.id
                 return (
+
                     <div className="actions">
-                    <button className="edit" onClick={() =>  { handleOpenModal('Edit', borrowedBookId) }}>
-                        <FontAwesomeIcon icon={faEdit} title="edit"/>
-                    </button>
-                    <button className="show" onClick={() =>  { handleOpenModal('Show', borrowedBookId) }}>
-                        <FontAwesomeIcon icon={faEye} title="show" />
-                    </button>
-                    <button className="trash" onClick={() => { handleOpenModal('Delete', borrowedBookId) }}>
-                        <FontAwesomeIcon icon={faTrash} title="delete" />
-                    </button>
+                    {
+                        status === 'requested' && (
+                            <button className="approve" onClick={() =>  { handleOpenModal('Approve', borrowedBookId) }}>
+                                <FontAwesomeIcon icon={faCheck} title="approve"/>
+                            </button>
+                        )
+                    }
+
+                    {
+                        status === 'borrowed' && (
+                            <button className="return" onClick={() =>  { handleOpenModal('Return', borrowedBookId) }}>
+                                <FontAwesomeIcon icon={faUndo} title="return"/>
+                            </button>
+                        )
+                    }
+
+                    {/* <button className="eye" onClick={() =>  { handleOpenModal('Show', borrowedBookId) }}>
+                        <FontAwesomeIcon  icon={faEye} title="show" />
+                    </button> */}
+
+                    {   status === 'requested' && (
+                            <button className="ban" onClick={() =>  { handleOpenModal('Deny', borrowedBookId) }}>
+                                <FontAwesomeIcon  icon={faBan} title="deny" />
+                            </button>
+                        )
+                    }
                 </div>
                 )
             }
         }
     ]
+
+    const filteredColumns = useMemo(() => {
+        switch (status) {
+            case 'requested':
+                return columns.filter(col => !['borrowed_date', 'returned_date', 'total_penalty', 'status', 'must_return_date'].includes(col.accessorKey));
+            
+            case 'borrowed':
+                return columns.filter(col => !['returned_date', 'total_penalty', 'status'].includes(col.accessorKey));
+    
+            case 'returned': 
+                return columns.filter(col => col.header !== 'ACTION');
+            default: 
+                return columns;
+        }
+    }, [status]);
+
+     
 
     return (
         <div className="borrow-page">
@@ -138,11 +194,11 @@ const BorrowedBooksPage = ({roleId, status}) => {
                 (<Loader/>) : 
                 (   
                     <div> 
-                        <h1 className='borrow-title'>{status}</h1>
+                        { !loading && <h1 className='borrow-title'>{status}</h1>}
                         <ManagementTable 
-                            title='status' 
+                            title='Books or Name' 
                             data={borrowedBooks}
-                            columns={columns}
+                            columns={filteredColumns}
                             loading={loading}
                             onPageChange={ newPage => setPage(newPage)}
                             onCreate={handleOpenModal}
@@ -151,17 +207,16 @@ const BorrowedBooksPage = ({roleId, status}) => {
                     </div>
                 )
             }
-
+    
             {
-                // openModal &&
-                // <UserForm
-                //     closeModal={() => { handleCloseModal()}}
-                //     action={action}
-                //     id={id}
-                //     onUpdate={handleUpdate}
-                //     title={title}
-                //     roleId={roleId}
-                // />
+                openModal &&
+                <ConfirmationModal
+                    closeModal={() => { handleCloseModal()}}
+                    action={action}
+                    id={id}
+                    onUpdate={handleUpdate}
+                    message={message}
+                />
             }
         </div>
     )

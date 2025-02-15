@@ -1,0 +1,9 @@
+.burger-menu {
+    font-size: 2rem;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+  }
+  
+  .burger-menu:hover {
+    transform: scale(1.1);
+  }

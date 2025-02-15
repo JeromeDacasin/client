@@ -6,6 +6,7 @@ const useModal = () => {
     const [openModal, setOpenModal] = useState(null);
 
     const handleOpenModal = (action, id) => {
+        console.log(id)
         setId(id);
         setAction(action);
         setOpenModal(true);

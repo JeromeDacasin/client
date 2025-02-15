@@ -2,7 +2,42 @@
     display: flex;
     justify-content: center;
     min-height: 100vh;
-    padding-top: 100px;
-   
+    padding-top: 30px;
 }
 
+.toggle-button {
+    display: inline-flex;
+    align-items: center;
+    cursor: pointer;
+    background-color: #ccc;
+    border-radius: 25px;
+    padding: 5px;
+    width: 60px;
+    height: 30px;
+    justify-content: space-between;
+    transition: background-color 0.3s;
+  }
+  
+  .toggle-indicator {
+    width: 20px;
+    height: 20px;
+    background-color: white;
+    border-radius: 50%;
+    transition: transform 0.3s ease-in-out;
+  }
+  
+  .toggle-button.on {
+    background-color: #4caf50;
+  }
+  
+  .toggle-button.off {
+    background-color: #f44336;
+  }
+  
+  .toggle-indicator.on {
+    transform: translateX(30px);
+  }
+  
+  .toggle-indicator.off {
+    transform: translateX(0px);
+  }

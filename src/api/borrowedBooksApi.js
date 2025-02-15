@@ -27,4 +27,9 @@ export const createBorrowedBook = async payload => {
     return response.data;
 }
 
+export const fetchMyHistories = async () => {
+    const response = axios.get(`${viteURI}/my-books`, headerConfig);
+    return response;
+} 
+
 

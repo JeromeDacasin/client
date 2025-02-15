@@ -1,6 +1,6 @@
-import { faHouse, faBook, faFolderTree, faUserPen, faGraduationCap, faChalkboardTeacher, faBookOpen, faPesoSign, faScroll, faSync, faPencilAlt  } from "@fortawesome/free-solid-svg-icons"
+import { faHouse, faBook, faFolderTree, faUserPen, faGraduationCap, faChalkboardTeacher, faBookOpen, faPesoSign, faScroll, faSync, faPencilAlt, faUserGear  } from "@fortawesome/free-solid-svg-icons"
 
-export const sideMenuData = [
+export const adminMenu = [
     {
         title: 'Home',
         icon:  faHouse,
@@ -38,6 +38,11 @@ export const sideMenuData = [
         link: '/publishers'
     },
     {
+        title: 'Roles',
+        icon: faUserGear,
+        link: '/roles'
+    },
+    {
         title: 'Fines',
         icon: faPesoSign,
         link: '/penalties'
@@ -56,7 +61,26 @@ export const sideMenuData = [
         title: 'Histories',
         icon: faScroll,
         link: '/histories'
-    },
-
-
+    },  
 ]
+
+
+export const userMenu = [
+    {
+        title: 'Home',
+        icon:  faHouse,
+        link: '/home'
+
+    },
+    {
+        title: 'Books',
+        icon: faBook,
+        link: '/books'
+    },
+    {
+        title: 'Borrowed Books',
+        icon: faBookOpen,
+        link:  '/my-books'
+
+    }
+] 

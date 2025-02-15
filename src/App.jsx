@@ -1,26 +1,81 @@
-import { Outlet } from "react-router-dom"
-import { useAuth } from "./context/AuthContext.jsx"
+import { Outlet } from "react-router-dom";
+import { useAuth } from "./context/AuthContext.jsx";
 import SideMenu from "./components/SideMenu/SideMenu.jsx";
 import './App.css';
 import BurgerMenu from "./components/BurgerMenu/BurgerMenu.jsx";
+import { useEffect, useRef, useState } from "react";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faArrowRightFromBracket } from "@fortawesome/free-solid-svg-icons";
+import useModal from "./hooks/useModal.jsx";
+import ChangePasswordModal from "./components/Modal/ChangePassword/ChangePasswordModal.jsx";
+
 
 function App() {
-  const { user } = useAuth();
+  const { user, logout } = useAuth();
+  const [isMenuOpen, setIsMenuOpen] = useState(false);  
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+  const dropdownRef = useRef(null);
+  const { openModal, handleOpenModal, handleCloseModal} = useModal();
+  
+  const toggleMenu = () => {
+    setIsMenuOpen((prev) => !prev);
+  };
+
+
+  const handleLogout  = () => {
+    setIsDropdownOpen(false);
+    logout();
+  }
+
+
+  useEffect(() => {
+    function handleClickOutside(event) {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+        setIsDropdownOpen(false);
+      }
+    }
+    
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, []);
+
+
   return (
     <div className="App">
       <div className="layout">
-      {user && (
-        <div>
-          <BurgerMenu />
-          <SideMenu />
-        </div>
-      )}
-          <div className="pages">
-            <Outlet />
+        {user && (
+          <div>
+            <BurgerMenu toggleMenu={toggleMenu} isOpen={isMenuOpen}/> 
+            <SideMenu isOpen={isMenuOpen} /> 
+              <div className={`user-profile ${isDropdownOpen ? "open" : ""}`} ref={dropdownRef}>
+              <span onClick={() => setIsDropdownOpen(!isDropdownOpen)}>{user.fullname}</span>
+              {isDropdownOpen && (
+                <div className="user-dropdown">
+                  <button onClick={() => handleOpenModal()}>Change Password</button>
+                  <button onClick={() => handleLogout()} className="logout-btn">
+                    <FontAwesomeIcon icon={faArrowRightFromBracket}/> LOGOUT</button>
+                </div>
+              )}
+            </div>
           </div>
+        )}
+
+        {
+          openModal && (
+            <ChangePasswordModal
+              closeModal={handleCloseModal}
+
+            />
+          )
+        }
+        <div className="pages">
+          <Outlet />
+        </div>
       </div>
     </div>
-  )
+  );
 }
 
-export default App
+export default App;

@@ -25,3 +25,8 @@ export const createUser = async payload => {
     const response = await axios.post(`${viteURI}/users`, payload, headerConfig);
     return response.data;
 }
+
+export const changePassword = async payload => {
+    const response = await axios.put(`${viteURI}/user/password`, payload, headerConfig);
+    return response.data;
+}

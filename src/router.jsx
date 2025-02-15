@@ -3,7 +3,6 @@ import Landing from "./pages/Landing";
 import NotFound from "./pages/NotFound";
 import Login from "./pages/Login";
 import Home from "./pages/Home/Home";
-import Books from "./pages/Books/Books";
 import ProtectedRoutes from "./utils/ProtectedRoutes";
 import App from "./App";
 import { PublicRoute } from "./utils/PublicRoute";
@@ -13,6 +12,9 @@ import PublisherPage from "./pages/Publishers/PublisherPage";
 import UsersPage from "./pages/Users/UsersPage";
 import PenaltyPage from "./pages/Penalties/PenaltyPage";
 import BorrowedBooksPage from "./pages/BorrowedBooks/BorrowedBooksPage";
+import BookPage from "./pages/Books/BookPage";
+import RolePage from "./pages/Roles/RolePage";
+import MyBooksPage from "./pages/MyBooks/MyBooks";
 
 const router = createBrowserRouter([
     {
@@ -40,7 +42,7 @@ const router = createBrowserRouter([
                     },
                     {
                         path: "/books",
-                        element: <Books/>,
+                        element: <BookPage/>,
                     },
                     {
                         path: "/departments",
@@ -71,6 +73,10 @@ const router = createBrowserRouter([
                         element: <PenaltyPage/>,
                     },
                     {
+                        path: "/roles",
+                        element: <RolePage/>,
+                    },
+                    {
                         path: "/publishers",
                         element: <PublisherPage/>,
                     },
@@ -84,8 +90,12 @@ const router = createBrowserRouter([
                     },
                     {
                         path: "/pendings",
-                        element: <BorrowedBooksPage status='ongoing'/>, 
+                        element: <BorrowedBooksPage status='borrowed'/>, 
                     },
+                    {
+                        path: "/my-books",
+                        element: <MyBooksPage/>
+                    }
                      
                 ]
             },
