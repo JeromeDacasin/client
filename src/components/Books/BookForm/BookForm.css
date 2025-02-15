@@ -1,0 +1,94 @@
+.book-modal {
+  max-width: 600px;
+  margin: auto;
+  padding: 20px;
+  background-color: #fff;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.book-form-group {
+  margin-bottom: 20px;
+}
+
+.book-inline-inputs {
+  display: flex;
+  justify-content: space-between;
+  gap: 20px; 
+}
+
+.book-input-container {
+  flex: 1; 
+}
+
+label {
+  font-weight: bold;
+  display: block;
+  margin-bottom: 5px;
+}
+
+.book-input {
+  width: 100%;
+  padding: 10px;
+  font-size: 1rem;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+} 
+
+input:disabled, textarea:disabled, select:disabled {
+  background-color: #f0f0f0;
+}
+
+.book-btn {
+    background-color: #007BFF;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    font-size: 1rem;
+    border-radius: 5px;
+    cursor: pointer;
+    display: block;
+    margin: 20px auto; /* Centering the button */
+  
+}
+
+button:hover {
+  background-color: #0056b3;
+}
+
+.toggle-button {
+  display: inline-flex;
+  align-items: center;
+  cursor: pointer;
+  background-color: #ccc;
+  border-radius: 25px;
+  padding: 5px;
+  width: 60px;
+  height: 30px;
+  justify-content: space-between;
+  transition: background-color 0.3s;
+}
+
+.toggle-button.on {
+  background-color: #4caf50; /* Green when On */
+}
+
+.toggle-button.off {
+  background-color: #f44336; /* Red when Off */
+}
+
+.toggle-indicator {
+  width: 20px;
+  height: 20px;
+  background-color: white;
+  border-radius: 50%;
+  transition: transform 0.3s ease-in-out;
+}
+
+.toggle-button.on .toggle-indicator {
+  transform: translateX(30px);
+}
+
+.toggle-button.off .toggle-indicator {
+  transform: translateX(0px);
+}

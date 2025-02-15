@@ -9,10 +9,10 @@ const Home = () => {
     return (
         <div >
             <div className='home'>
-                <div className='card'>
+                <div className='card-home'>
                     <img src={logo} alt="logo" />
-                    <h2>{user?.user} Portal</h2>
-                    <h3>ONLINE PUBLIC ACCESS CATALOG</h3>
+                    <h2>Welcome {user?.fullname} !</h2>
+                    <h3>{user?.user} ACCESS CATALOG</h3>
                 </div>
                 </div>
         </div>

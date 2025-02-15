@@ -1,12 +1,13 @@
-import { faBars } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import './BurgerMenu.css';
 
-const BurgerMenu = () => {
-    return (
-        <div className='burger-menu'>
-            <FontAwesomeIcon icon={faBars}/>
-        </div>
-    )
+
+function BurgerMenu({ toggleMenu, isOpen }) {
+
+  return (
+    <div className="burger-menu" onClick={toggleMenu} style={{ background: isOpen ? 'black' : 'white', color: isOpen ? 'white' : 'black' }} >
+      {isOpen ? '✖' : '☰'} 
+    </div>
+  );
 }
 
 export default BurgerMenu;

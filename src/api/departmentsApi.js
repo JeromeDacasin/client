@@ -8,5 +8,23 @@ export const fetchDepartments = async params => {
         ...headerConfig
     })
 
-    return response.data.data;
+    return response.data;
 }
+
+export const fetchDepartment = async id => {
+    const response = await axios.get(`${viteURI}/departments/${id}`, headerConfig);
+    return response.data;
+}
+
+export const updateDepartment = async payload => {
+    const { id } = payload;
+    const response = await axios.put(`${viteURI}/departments/${id}`, payload, headerConfig);
+    return response.data;
+}
+
+export const createDepartment = async payload => {
+    const response = await axios.post(`${viteURI}/departments`, payload, headerConfig);
+    return response.data;
+}
+
+

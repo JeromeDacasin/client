@@ -3,22 +3,24 @@
     align-items: center;
     justify-content: center;
     flex-direction: column;
+    height: 100vh;
 }
 
-.home .card {
-    background: #000;
-    opacity: 75%;
+.home .card-home {
+    background: rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(10px); 
+    -webkit-backdrop-filter: blur(10px);
     border-radius: 10px;
     padding: 70px 30px;
     text-align: center;
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.3);
+    border: 1px solid rgba(255, 255, 255, 0.2);
 }
 
-.home .card h2, .home .card h3 {
-    color: #fff;
+.home .card-home h2, .home .card-home h3 {
+    color: #333;
     font-size: 2rem;
-}
-
-.home .card h2 {
+    text-shadow: 1px 1px 5px rgba(0, 0, 0, 0.3); 
     text-transform: uppercase;
 }
 

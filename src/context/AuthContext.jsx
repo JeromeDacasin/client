@@ -4,8 +4,15 @@ import axios from "axios";
 const AuthContext = createContext();
 
 export const AuthProvider = ({children}) => {
-    const [user, setUser] = useState(null);
-    const [token, setToken] = useState(null);
+    const [user, setUser] = useState(() => {
+        const storedUser = localStorage.getItem('user');
+        return storedUser ? JSON.parse(storedUser) : null;
+    });
+
+    const [token, setToken] = useState(() => {
+        const storedToken = localStorage.getItem('authToken');
+        return storedToken ? JSON.parse(storedToken) : null;
+    });
 
     const login = async payload => {
 
@@ -15,6 +22,8 @@ export const AuthProvider = ({children}) => {
             const authToken = response.data.data.token;
             const userObj = {
                 user: response.data.data.role,
+                fullname: response.data.data.full_name
+
             };
            
             localStorage.setItem('user', JSON.stringify(userObj));
@@ -52,15 +61,15 @@ export const AuthProvider = ({children}) => {
         return !!user;
     }
 
-    useEffect( () => {
-        const storedToken  = localStorage.getItem('authToken')
-        const storedUser  = localStorage.getItem('user')
-        if (storedToken  && storedUser) {
-            setUser(JSON.parse(storedUser));  
-            setToken(JSON.parse(storedToken));  
-        }
+    // useEffect( () => {
+    //     const storedToken  = localStorage.getItem('authToken')
+    //     const storedUser  = localStorage.getItem('user')
+    //     if (storedToken  && storedUser) {
+    //         setUser(JSON.parse(storedUser));  
+    //         setToken(JSON.parse(storedToken));  
+    //     }
 
-    }, []);
+    // }, []);
 
     return (
         <AuthContext.Provider value={{user, token, login, logout, isLoggedIn}}>
