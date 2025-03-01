@@ -25,3 +25,8 @@ export const createPublisher = async payload => {
     const response = await axios.post(`${viteURI}/publishers`, payload, headerConfig);
     return response.data;
 }
+
+export const deletePublisher = async id => {
+    const response = await axios.delete(`${viteURI}/publishers/${id}`, headerConfig);
+    return response.data;
+}

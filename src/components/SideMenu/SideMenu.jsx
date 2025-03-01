@@ -1,6 +1,6 @@
 import './SideMenu.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { adminMenu, userMenu } from './SideMenuData.js';
+import { adminMenu, userMenu } from './sideMenuData';
 import logo from './../../assets/logo.png';
 import { NavLink } from 'react-router-dom';
 import { useAuth } from '../../context/AuthContext';

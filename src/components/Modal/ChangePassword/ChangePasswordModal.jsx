@@ -26,7 +26,6 @@ const ChangePasswordModal = ({closeModal}) => {
 
     const handleSave = async (e) => {
         e.preventDefault();
-       console.log(data)
         if (data.new !== data.confirm) {
             showAlertError("New password and confirm password do not match");
             return;

@@ -33,3 +33,21 @@
     margin-bottom: 5px;
     justify-content: space-between;
 }
+
+.table-container {
+    position: relative;
+    transition: all 0.3s ease-in-out;
+}
+
+.loading-blur {
+    filter: blur(4px);
+    pointer-events: none;
+    user-select: none;
+}
+
+.table-loader {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}

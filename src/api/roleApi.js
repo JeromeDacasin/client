@@ -25,3 +25,8 @@ export const createRole = async payload => {
     const response = await axios.post(`${viteURI}/roles`, payload, headerConfig);
     return response.data;
 }
+
+export const deleteRole = async id => {
+    const response = await axios.delete(`${viteURI}/roles/${id}`, headerConfig);
+    return response.data;
+}

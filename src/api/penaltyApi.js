@@ -27,4 +27,8 @@ export const createPenalty = async payload => {
     return response.data;
 }
 
+export const deletePenalty = async id => {
+    const response = await axios.delete(`${viteURI}/penalties/${id}`, headerConfig);
+    return response.data;
+}
 
