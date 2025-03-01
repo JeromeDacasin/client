@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { fetchDepartments } from "../../api/departmentsApi";
+import { fetchDepartments, deleteDepartment } from "../../api/departmentsApi";
 import { useLoading } from "../../hooks/useLoading";
 import Loader from "../../components/Loader/Loader";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -9,6 +9,7 @@ import ManagementTable from "../../components/common/ManagementTable/ManagementT
 import DepartmentForm from "../../components/Departments/DepartmentForm/DepartmentForm";
 import useModal from "../../hooks/useModal";
 import { useDebounce } from "../../hooks/useDebounce";
+import DeleteModal from "../../components/Modal/DeleteModal/DeleteModal";
 
 
 
@@ -29,6 +30,13 @@ const Department = () => {
                 data: prevData.data.map(department => department.id === updatedDepartment.id ? updatedDepartment : department)  
         }))
     }
+
+    const handleDeleteFromUI = (deletedId) => {
+        setDepartments(prevDepartments => ({
+            ...prevDepartments,
+            data: prevDepartments.data.filter(department => department.id !== deletedId)
+        }));
+    };
 
     const handleSearch = value => {
         setSearch(value)
@@ -119,7 +127,7 @@ const Department = () => {
                 )
             }
             {
-                openModal && 
+                openModal && action !== 'Delete' &&
                 <DepartmentForm 
                     closeModal={() => {handleCloseModal()}}
                     action={action}
@@ -127,6 +135,18 @@ const Department = () => {
                     onUpdate={handleUpdate}
                 />
             }
+            {
+                openModal && action === 'Delete' && 
+                (
+                    <DeleteModal 
+                        closeModal={handleCloseModal}
+                        id={id}
+                        onDelete={deleteDepartment}
+                        onUpdate={handleDeleteFromUI}
+                    />
+                )
+            }
+            
         </div>
     )
 };

@@ -2,13 +2,14 @@ import { useEffect, useState } from "react";
 import ManagementTable from "../../components/common/ManagementTable/ManagementTable";
 import { useLoading } from "../../hooks/useLoading";
 import { useDebounce } from "../../hooks/useDebounce";
-import { fetchRoles } from "../../api/roleApi";
+import { deleteRole, fetchRoles } from "../../api/roleApi";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEdit, faEye, faTrash } from "@fortawesome/free-solid-svg-icons";
 import useModal from "../../hooks/useModal";
 import Loader from "../../components/Loader/Loader";
 import './RolePage.css';
 import RoleForm from "../../components/Roles/RoleForm/RoleForm";
+import DeleteModal from "../../components/Modal/DeleteModal/DeleteModal";
 
 const RolePage = () => {
 
@@ -28,6 +29,14 @@ const RolePage = () => {
                 data: prevData.data.map(role => role.id === updatedRole.id ? updatedRole : role)  
         }))
     }
+
+    const handleDeleteFromUI = (deletedId) => {
+        setRoles(prevRoles => ({
+            ...prevRoles,
+            data: prevRoles.data.filter(role => role.id !== deletedId)
+        }));
+    };
+
 
     const handleSearch = value => {
         setSearch(value);
@@ -120,13 +129,24 @@ const RolePage = () => {
             }
 
             {
-                openModal &&
+                openModal && action !== 'Delete' &&
                 <RoleForm
                     closeModal={() => handleCloseModal()}
                     action={action}
                     id={id}
                     onUpdate={handleUpdate}
                 />
+            }
+             {
+                openModal && action === 'Delete' && 
+                (
+                    <DeleteModal 
+                        closeModal={handleCloseModal}
+                        id={id}
+                        onDelete={deleteRole}
+                        onUpdate={handleDeleteFromUI}
+                    />
+                )
             }
         </div>
     )

@@ -2,13 +2,14 @@ import { useEffect, useState } from "react";
 import ManagementTable from "../../components/common/ManagementTable/ManagementTable";
 import { useLoading } from "../../hooks/useLoading";
 import { useDebounce } from "../../hooks/useDebounce";
-import { fetchPublishers } from "../../api/publisherApi";
+import { deletePublisher, fetchPublishers } from "../../api/publisherApi";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEdit, faEye, faTrash } from "@fortawesome/free-solid-svg-icons";
 import useModal from "../../hooks/useModal";
 import './PublisherPage.css';
 import PublisherForm from "../../components/Publishers/PublisherForm/PublisherForm";
 import Loader from "../../components/Loader/Loader";
+import DeleteModal from "../../components/Modal/DeleteModal/DeleteModal";
 
 const PublisherPage = () => {
 
@@ -28,6 +29,13 @@ const PublisherPage = () => {
                 data: prevData.data.map(publisher => publisher.id === updatedPublisher.id ? updatedPublisher : publisher)  
         }))
     }
+
+    const handleDeleteFromUI = (deletedId) => {
+        setPublishers(prevPublishers => ({
+            ...prevPublishers,
+            data: prevPublishers.data.filter(publisher => publisher.id !== deletedId)
+        }));
+    };
 
     const handleSearch = value => {
         setSearch(value);
@@ -120,13 +128,24 @@ const PublisherPage = () => {
             }
 
             {
-                openModal &&
+                openModal && action !== 'Delete' &&
                 <PublisherForm
                     closeModal={() => handleCloseModal()}
                     action={action}
                     id={id}
                     onUpdate={handleUpdate}
                 />
+            }
+             {
+                openModal && action === 'Delete' && 
+                (
+                    <DeleteModal 
+                        closeModal={handleCloseModal}
+                        id={id}
+                        onDelete={deletePublisher}
+                        onUpdate={handleDeleteFromUI}
+                    />
+                )
             }
         </div>
     )
