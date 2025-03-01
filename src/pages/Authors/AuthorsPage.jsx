@@ -2,13 +2,14 @@ import { useEffect, useState } from "react";
 import { useLoading } from "../../hooks/useLoading";
 import ManagementTable from "../../components/common/ManagementTable/ManagementTable";
 import useModal from "../../hooks/useModal";
-import { fetchAuthors } from "../../api/authorsApi";
+import { deleteAuthor, fetchAuthors } from "../../api/authorsApi";
 import Loader from "../../components/Loader/Loader";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEye, faEdit, faTrash } from "@fortawesome/free-solid-svg-icons";
 import AuthorForm from "../../components/Authors/AuthorForm/AuthorForm";
 import { useDebounce } from "../../hooks/useDebounce";
 import './AuthorsPage.css';
+import DeleteModal from "../../components/Modal/DeleteModal/DeleteModal";
 
 
 const AuthorsPage = () => {
@@ -28,6 +29,13 @@ const AuthorsPage = () => {
                 data: prevData.data.map(author => author.id === updatedAuthor.id ? updatedAuthor : author)  
         }))
     }
+
+    const handleDeleteFromUI = (deletedId) => {
+        setAuthors(prevAuthors => ({
+            ...prevAuthors,
+            data: prevAuthors.data.filter(author => author.id !== deletedId)
+        }));
+    };
 
     const handleSearch = value => {
         setSearch(value);
@@ -124,14 +132,25 @@ const AuthorsPage = () => {
         }
 
         {
-            openModal &&
+            openModal && action !== 'Delete' && 
             <AuthorForm
                 closeModal={ () => {handleCloseModal()}}
                 action={action}
                 id={id}
                 onUpdate={handleUpdate}
             />
+        }
 
+        {
+            openModal && action === 'Delete' && 
+            (
+                <DeleteModal 
+                    closeModal={handleCloseModal}
+                    id={id}
+                    onDelete={deleteAuthor}
+                    onUpdate={handleDeleteFromUI}
+                />
+            )
         }
         </div>
     )
