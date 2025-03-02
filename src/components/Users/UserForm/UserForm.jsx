@@ -15,7 +15,8 @@ const UserForm = ({closeModal, action, id, onUpdate, title, roleId}) => {
         gender: "",
         email: "",
         contact_number: "",
-        student_number: ""
+        student_number: "",
+        is_generated_student_number: 0
 
     });
     const [loading, setLoading] = useLoading();
@@ -164,14 +165,14 @@ const UserForm = ({closeModal, action, id, onUpdate, title, roleId}) => {
                                     <div>
                                         {action === 'Create' ? (
                                             <div className={formStyles['form-group']}>
-                                                <label htmlFor='student_number_option'>Student Number Option</label>
+                                                <label htmlFor='is_generated_student_number'>Student Number Option</label>
                                                 <div className={formStyles.options}>
                                                     <label className={formStyles.radio}>
                                                         <input
                                                             type='radio'
-                                                            name='student_number_option'
+                                                            name='is_generated_student_number'
                                                             value='auto'
-                                                            checked={data.student_number_option === 'auto'}
+                                                            checked={data.is_generated_student_number === 1}
                                                             onChange={handleChange}
                                                         />
                                                         Auto-generate
@@ -179,15 +180,15 @@ const UserForm = ({closeModal, action, id, onUpdate, title, roleId}) => {
                                                     <label className={formStyles.radio}>
                                                         <input
                                                             type='radio'
-                                                            name='student_number_option'
+                                                            name='is_generated_student_number'
                                                             value='manual'
-                                                            checked={data.student_number_option === 'manual'}
+                                                            checked={data.is_generated_student_number === 0}
                                                             onChange={handleChange}
                                                         />
                                                         Manual
                                                     </label>
                                                 </div>
-                                                {data.student_number_option === 'manual' && (
+                                                {data.is_generated_student_number === 0 && (
                                                     <div className={formStyles['form-group']}>
                                                         <label htmlFor='student_number'>Student Number</label>
                                                         <input
