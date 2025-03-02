@@ -21,7 +21,7 @@ const BookForm = ({ closeModal, id, action, onUpdate }) => {
         price: 0,
         department_id: "",
         author_id: "",
-        is_active: "",
+        is_active: 0,
         author: ""
     });
 

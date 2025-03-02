@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import ManagementTable from "../../components/common/ManagementTable/ManagementTable";
-import { fetchFines } from "../../api/penaltyApi";
+import { deletePenalty, fetchFines } from "../../api/penaltyApi";
 import { useLoading } from "../../hooks/useLoading";
 import './PenaltyPage.css';
 import CurrencyFormat from "../../utils/MoneyFormat";
@@ -10,6 +10,8 @@ import useModal from "../../hooks/useModal";
 import { useDebounce } from "../../hooks/useDebounce";
 import Loader from "../../components/Loader/Loader";
 import PenaltyForm from "../../components/Penalties/PenaltyForm/PenaltyForm";
+import DeleteModal from "../../components/Modal/DeleteModal/DeleteModal";
+import { deleteRole } from "../../api/roleApi";
 
 
 const PenaltyPage = () => {
@@ -29,6 +31,13 @@ const PenaltyPage = () => {
                 data: prevData.data.map(department => department.id === updatedDepartment.id ? updatedDepartment : department)  
         }))
     }
+    
+    const handleDeleteFromUI = (deletedId) => {
+        setFines(prevFines => ({
+            ...prevFines,
+            data: prevFines.data.filter(fine => fine.id !== deletedId)
+        }));
+    };
 
     const handleSearch = value => {
         setSearch(value)
@@ -137,6 +146,18 @@ const PenaltyPage = () => {
                     onUpdate={handleUpdate}
                 />
 
+            }
+
+            {
+                openModal && action === 'Delete' && 
+                (
+                    <DeleteModal 
+                        closeModal={handleCloseModal}
+                        id={id}
+                        onDelete={deletePenalty}
+                        onUpdate={handleDeleteFromUI}
+                    />
+                )
             }
         </div>
     )

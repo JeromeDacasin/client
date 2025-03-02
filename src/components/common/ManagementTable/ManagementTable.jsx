@@ -13,15 +13,10 @@ const ManagementTable = ({
     loading, 
     onPageChange, 
     onCreate,
-    onSearch
+    onSearch,
+    archive
 }) => {
-
     const { user } = useAuth();
-
-
-    if (loading) {
-        return <Loader/>
-    }
 
     return (
         <div className="management-table">
@@ -29,26 +24,24 @@ const ManagementTable = ({
                 <div className="search">
                     <SearchInput title={title} onChange={onSearch}/>
                 </div>
-                {
-                    title !== 'Books or Name' && ['Admin', 'Librarian'].includes(user.user) &&
+                {['Admin', 'Librarian'].includes(user.user) && title !== 'Books or Name' && !archive &&  (
                     <div className="create">
                         <CreateButton title={title} onCreate={onCreate}/>
                     </div> 
-                }
+                )}
             </div>
-            
-            {
-                !loading &&
-                data !== null &&
-                <Table 
-                    columns={columns} 
-                    data={data}
-                    onPageChange={onPageChange}
-                />
-          
-            }
+
+            <div className={`table-container ${loading ? 'loading-blur' : ''}`}>
+                <Table columns={columns} data={data} onPageChange={onPageChange} />
+                {loading && (
+                    <div className="table-loader">
+                        <Loader />
+                    </div>
+                )}
+            </div>
         </div>
-    )
+    );
 };
+
 
 export default ManagementTable;

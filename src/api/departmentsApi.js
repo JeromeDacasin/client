@@ -27,4 +27,9 @@ export const createDepartment = async payload => {
     return response.data;
 }
 
+export const deleteDepartment = async id => {
+    const response = await axios.delete(`${viteURI}/departments/${id}`, headerConfig);
+    return response.data;
+}
+
 

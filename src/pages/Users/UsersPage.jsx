@@ -6,9 +6,10 @@ import { useDebounce } from '../../hooks/useDebounce';
 import useModal from '../../hooks/useModal';
 import { faEdit, faEye, faTrash } from '@fortawesome/free-solid-svg-icons';
 import './UsersPage.css';
-import { fetchUsers } from '../../api/usersApi';
+import { deleteUser, fetchUsers } from '../../api/usersApi';
 import UserForm from '../../components/Users/UserForm/UserForm';
 import Loader from '../../components/Loader/Loader';
+import DeleteModal from '../../components/Modal/DeleteModal/DeleteModal';
 
 
 const UsersPage = ({roleId, title}) => {
@@ -28,6 +29,13 @@ const UsersPage = ({roleId, title}) => {
                 data: prevData.data.map(user => user.id === updatedUsers.id ? updatedUsers : user)  
         }))
     }
+
+    const handleDeleteFromUI = (deletedId) => {
+        setUsers(prevUsers => ({
+            ...prevUsers,
+            data: prevUsers.data.filter(user => user.id !== deletedId)
+        }));
+    };
 
     const handleSearch = value => {
         setSearch(value);
@@ -134,7 +142,7 @@ const UsersPage = ({roleId, title}) => {
             }
 
             {
-                openModal &&
+                openModal && action !== 'Delete' &&
                 <UserForm
                     closeModal={() => { handleCloseModal()}}
                     action={action}
@@ -143,6 +151,17 @@ const UsersPage = ({roleId, title}) => {
                     title={title}
                     roleId={roleId}
                 />
+            }
+            {
+                openModal && action === 'Delete' && 
+                (
+                    <DeleteModal 
+                        closeModal={handleCloseModal}
+                        id={id}
+                        onDelete={deleteUser}
+                        onUpdate={handleDeleteFromUI}
+                    />
+                )
             }
         </div>
     )

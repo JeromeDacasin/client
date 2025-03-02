@@ -26,6 +26,11 @@ export const createUser = async payload => {
     return response.data;
 }
 
+export const deleteUser = async id => {
+    const response = await axios.delete(`${viteURI}/users/${id}`, headerConfig);
+    return response.data;
+}
+
 export const changePassword = async payload => {
     const response = await axios.put(`${viteURI}/user/password`, payload, headerConfig);
     return response.data;
