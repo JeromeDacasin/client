@@ -14,12 +14,12 @@
 }
 
 
-
+/* dito yung pag update ng gradient background */
 .pages {
     flex: 1;
     height: 100%;
     overflow-y: auto;
-    background: linear-gradient(to right, #E5E1DA, #A7D8C0, #7DA8A1);
+    background: linear-gradient(to right, #58554d, #22563d, #11ac8a);
 }
 
 .user-profile {
@@ -87,6 +87,19 @@
     cursor: pointer;
 }
 
+.welcome-message {
+    position: absolute;
+    top: 20px;
+    left: 260px; /* Default for larger screens */
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #333;
+    z-index: 10;
+    padding: 8px 15px;
+    border-radius: 8px;
+    white-space: nowrap; /* Prevents text from breaking into multiple lines */
+}
+
 
 .user-dropdown a:hover, .user-dropdown button:hover {
     background: #f1f1f1;
@@ -101,6 +114,7 @@
     #side-menu {
         transform: none;
     }
+
 }
 
 
@@ -131,10 +145,20 @@
     #side-menu.open {
         left: 0;  
     }
+
+    .welcome-message {
+        display: none;
+    }
 }
 
 @media (max-width: 320px) {
     #side-menu {
         width: 100%;
     }
+
+    .welcome-message {
+        display: none;
+    }
+
+    
 }

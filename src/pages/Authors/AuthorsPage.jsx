@@ -88,14 +88,14 @@ const AuthorsPage = () => {
                 const authorId = cell.row.original.id
                 return (
                     <div className="actions">
-                    <button className="edit" onClick={() =>  { handleOpenModal('Edit', authorId) }}>
-                        <FontAwesomeIcon icon={faEdit} title="edit"/>
+                    <button className="edit" onClick={() =>  { handleOpenModal('Edit', authorId) }} title="edit">
+                        <FontAwesomeIcon icon={faEdit} />
                     </button>
-                    <button className="show" onClick={() =>  { handleOpenModal('Show', authorId) }}>
-                        <FontAwesomeIcon icon={faEye} title="show" />
+                    <button className="show" onClick={() =>  { handleOpenModal('Show', authorId) }} title="show">
+                        <FontAwesomeIcon icon={faEye} />
                     </button>
-                    <button className="trash" onClick={() => { handleOpenModal('Delete', authorId) }}>
-                        <FontAwesomeIcon icon={faTrash} title="delete" />
+                    <button className="trash" onClick={() => { handleOpenModal('Delete', authorId) }}  title="delete">
+                        <FontAwesomeIcon icon={faTrash}/>
                     </button>
                 </div>
                 )

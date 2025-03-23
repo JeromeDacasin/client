@@ -28,8 +28,27 @@ export const createBorrowedBook = async payload => {
 }
 
 export const fetchMyHistories = async () => {
-    const response = axios.get(`${viteURI}/my-books`, headerConfig);
+    const response = await axios.get(`${viteURI}/my-books`, headerConfig);
     return response;
 } 
 
+export const exportHistories = async () => {
 
+    const payload = {
+        status: 'returned',
+        export: true
+    };
+
+    try {
+        const response = await axios.get(`${viteURI}/exports`, {
+            params: payload,
+            responseType: 'blob', 
+            ...headerConfig
+        });
+
+        return response;
+    } catch (error) {
+        console.error("Export API error:", error);
+        throw new Error("Failed to export file.");
+    }
+}

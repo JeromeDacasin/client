@@ -3,6 +3,7 @@ import { useAuth } from "../../../context/AuthContext";
 import Loader from "../../Loader/Loader";
 import Table from "../../Table/Table";
 import CreateButton from "../Button/CreateButton/CreateButton";
+import ExportButton from "../Button/ExportButton/ExportButton";
 import SearchInput from "../Input/SearchInput/SearchInput";
 import './ManagementTable.css';
 
@@ -14,10 +15,12 @@ const ManagementTable = ({
     onPageChange, 
     onCreate,
     onSearch,
-    archive
+    archive,
+    status,
+    onExport
 }) => {
     const { user } = useAuth();
-
+    console.log(status);
     return (
         <div className="management-table">
             <div className="table-options">
@@ -27,6 +30,11 @@ const ManagementTable = ({
                 {['Admin', 'Librarian'].includes(user.user) && title !== 'Books or Name' && !archive &&  (
                     <div className="create">
                         <CreateButton title={title} onCreate={onCreate}/>
+                    </div> 
+                )}
+                {['Admin', 'Librarian'].includes(user.user) && status === 'returned' && !archive &&  (
+                    <div className="create">
+                        <ExportButton onExport={onExport}/>
                     </div> 
                 )}
             </div>

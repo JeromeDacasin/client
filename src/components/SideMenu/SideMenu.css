@@ -7,6 +7,9 @@
     padding: 20px 0;
     overflow-y: scroll;
     scrollbar-width: none;
+    display: flex;
+    flex-direction: column;
+    
 }
 
 .side-menu-image {
@@ -19,16 +22,16 @@
 
 .side-menu-image img {
     height: 80px;
-    filter:  drop-shadow(0 2px 4px rgba(0, 0, 0, 1));
-    /* align-items: center; */
+    filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 1));
 }
 
 .side-menu-list {
-    max-height: calc(100vh - 100px); 
-   margin: 0;
-   padding: 0;
-   width: 100%;
-
+    flex: 1;
+    max-height: calc(100vh - 200px);
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    overflow-y: auto; 
 }
 
 .side-menu-list .list {
@@ -41,7 +44,7 @@
     align-items: center;
     font-weight: 600;
     font-size: 1rem;
-    transition: backround 0.3s ease, transform 0.2s ease;
+    transition: background 0.3s ease, transform 0.2s ease;
     background: rgba(255, 255, 255, 0.1);
     text-decoration: none;
     color: #000;
@@ -64,6 +67,38 @@
     flex: 70%;
     margin-left: -25px;
 }
-side-menu-list .list:hover .side-menu-icon {
-    opacity: 1;
+
+.logout-container {
+    padding-top: 20px;
+    text-align: center;
+    border-top: 1px solid rgba(0, 0, 0, 0.1); 
+    /* border-top: 1px solid rgba(255, 255, 255, 0.1); */
+    /* box-shadow: 0px -4px 10px rgba(0, 0, 0, 0.2);  */
+}
+
+.logout-button {
+    width: 100%;
+    padding: 10px;
+    background: rgba(255, 255, 255, 0.1);
+    border: none;
+    border-radius: 5px;
+    color: #000;
+    font-weight: 600;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background 0.3s ease;
+}
+
+.logout-button:hover {
+    background: rgba(255, 255, 255, 0.25);
+}
+
+@media (max-width: 768px) {
+    #side-menu {
+        width: 100%;
+    }
+
+    .logout-button {
+        font-size: 0.9rem; 
+    }
 }

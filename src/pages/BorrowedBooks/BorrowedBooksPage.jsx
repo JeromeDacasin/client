@@ -4,11 +4,12 @@ import { useEffect, useMemo, useState } from 'react';
 import { useLoading } from '../../hooks/useLoading';
 import { useDebounce } from '../../hooks/useDebounce';
 import useModal from '../../hooks/useModal';
-import { faBan, faCheck, faEye, faUndo } from '@fortawesome/free-solid-svg-icons';
+import { faBan, faCheck, faUndo } from '@fortawesome/free-solid-svg-icons';
 import Loader from '../../components/Loader/Loader';
-import { fetchBorrowedBooks } from '../../api/borrowedBooksApi';
+import { exportHistories, fetchBorrowedBooks } from '../../api/borrowedBooksApi';
 import './BorrowedBooksPage.css';
 import ConfirmationModal from '../../components/Modal/ConfirmationModal/ConfirmationModal';
+import { showAlertSuccess } from '../../utils/toastify';
 
 
 const BorrowedBooksPage = ({roleId, status}) => {
@@ -33,14 +34,39 @@ const BorrowedBooksPage = ({roleId, status}) => {
             data: filteredBooks,  
         };
 
-    
-        
         setBorrowedBooks(updatedBooks);
-    
-    
-
-
     }
+
+    const handleExport = async () => {
+        try {
+            setLoading(true);
+            const response = await exportHistories();
+    
+            if (!response || !response.data) {
+                throw new Error("No CSV data received from the server.");
+            }
+    
+            const blob = new Blob([response.data], { type: "text/csv" });
+            const url = window.URL.createObjectURL(blob);
+    
+            
+            const a = document.createElement("a");
+            a.href = url;
+            a.download = "history.csv";
+    
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            window.URL.revokeObjectURL(url);
+            showAlertSuccess("CSV Exported Successfully");
+        } catch (error) {
+            console.error("Export failed:", error);
+
+        } finally {
+            setLoading(false);
+        }
+    };
+    
 
     const handleSearch = value => {
         setSearch(value);
@@ -139,16 +165,16 @@ const BorrowedBooksPage = ({roleId, status}) => {
                     <div className="actions">
                     {
                         status === 'requested' && (
-                            <button className="approve" onClick={() =>  { handleOpenModal('Approve', borrowedBookId) }}>
-                                <FontAwesomeIcon icon={faCheck} title="approve"/>
+                            <button className="approve" onClick={() =>  { handleOpenModal('Approve', borrowedBookId) }} title="approve">
+                                <FontAwesomeIcon icon={faCheck} />
                             </button>
                         )
                     }
 
                     {
                         status === 'borrowed' && (
-                            <button className="return" onClick={() =>  { handleOpenModal('Return', borrowedBookId) }}>
-                                <FontAwesomeIcon icon={faUndo} title="return"/>
+                            <button className="return" onClick={() =>  { handleOpenModal('Return', borrowedBookId) }} title="return">
+                                <FontAwesomeIcon icon={faUndo} />
                             </button>
                         )
                     }
@@ -158,8 +184,8 @@ const BorrowedBooksPage = ({roleId, status}) => {
                     </button> */}
 
                     {   status === 'requested' && (
-                            <button className="ban" onClick={() =>  { handleOpenModal('Deny', borrowedBookId) }}>
-                                <FontAwesomeIcon  icon={faBan} title="deny" />
+                            <button className="ban" onClick={() =>  { handleOpenModal('Deny', borrowedBookId) }} title="deny" >
+                                <FontAwesomeIcon  icon={faBan} />
                             </button>
                         )
                     }
@@ -203,6 +229,8 @@ const BorrowedBooksPage = ({roleId, status}) => {
                             onPageChange={ newPage => setPage(newPage)}
                             onCreate={handleOpenModal}
                             onSearch={handleSearch}
+                            status={status}
+                            onExport={handleExport}
                         />
                     </div>
                 )

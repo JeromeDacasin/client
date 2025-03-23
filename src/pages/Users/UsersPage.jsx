@@ -74,10 +74,10 @@ const UsersPage = ({roleId, title}) => {
             accessorKey: 'id',
             cell: ({row}) => row.index + 1 + (page - 1) * 10
         },
-        {
-            header: 'USERNAME',
-            accessorKey: 'username'
-        },
+        // {
+        //     header: 'USERNAME',
+        //     accessorKey: 'username'
+        // },
         {
             header: 'FIRSTNAME',
             accessorKey: 'first_name'
@@ -104,14 +104,14 @@ const UsersPage = ({roleId, title}) => {
                 const userId = cell.row.original.id
                 return (
                     <div className="actions">
-                    <button className="edit" onClick={() =>  { handleOpenModal('Edit', userId) }}>
-                        <FontAwesomeIcon icon={faEdit} title="edit"/>
+                    <button className="edit" onClick={() =>  { handleOpenModal('Edit', userId) }} title="edit">
+                        <FontAwesomeIcon icon={faEdit} />
                     </button>
-                    <button className="show" onClick={() =>  { handleOpenModal('Show', userId) }}>
-                        <FontAwesomeIcon icon={faEye} title="show" />
+                    <button className="show" onClick={() =>  { handleOpenModal('Show', userId) }} title="show" >
+                        <FontAwesomeIcon icon={faEye} />
                     </button>
-                    <button className="trash" onClick={() => { handleOpenModal('Delete', userId) }}>
-                        <FontAwesomeIcon icon={faTrash} title="delete" />
+                    <button className="trash" onClick={() => { handleOpenModal('Delete', userId) }} title="delete" >
+                        <FontAwesomeIcon icon={faTrash} />
                     </button>
                 </div>
                 )

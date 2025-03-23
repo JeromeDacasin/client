@@ -39,14 +39,14 @@ const Table = ({columns, data, onPageChange}) => {
             </table>
             <div className="pagination">
                 <button
-                    className="btn"
+                    className="btn btn-first"
                     onClick={() => onPageChange(1)}
                     disabled={data.meta.current_page === 1}
                 >
                     First
                 </button>
                 <button
-                    className="btn"
+                    className="btn btn-mid"
                     onClick={() => onPageChange(data.meta.current_page - 1)}
                     disabled={!data.links.prev}
                 >
@@ -59,14 +59,14 @@ const Table = ({columns, data, onPageChange}) => {
                     </strong>
                 </span>
                 <button
-                    className="btn"
+                    className="btn btn-mid"
                     onClick={() => onPageChange(data.meta.current_page + 1)}
                     disabled={!data.links.next}
                 >
                     Next
                 </button>
                 <button
-                    className="btn"
+                    className="btn btn-last"
                     onClick={() => onPageChange(data.meta.last_page)}
                     disabled={data.meta.current_page === data.meta.last_page}
                 >

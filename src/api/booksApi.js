@@ -31,3 +31,10 @@ export const deleteBook = async id => {
     return response.data;
 }
 
+export const retrieveBook = async id => {
+    const payload = {
+        deleted_at: null
+    }
+    const response = await axios.patch(`${viteURI}/books/${id}/restore`, payload , headerConfig);
+    return response.data;
+}

@@ -89,14 +89,14 @@ const RolePage = () => {
                 const roleId = cell.row.original.id
                 return (
                     <div className="actions">
-                    <button className="edit" onClick={() =>  { handleOpenModal('Edit', roleId) }}>
-                        <FontAwesomeIcon icon={faEdit} title="edit"/>
+                    <button className="edit" onClick={() =>  { handleOpenModal('Edit', roleId) }} title="edit">
+                        <FontAwesomeIcon icon={faEdit} />
                     </button>
-                    <button className="show" onClick={() =>  { handleOpenModal('Show', roleId) }}>
-                        <FontAwesomeIcon icon={faEye} title="show" />
+                    <button className="show" onClick={() =>  { handleOpenModal('Show', roleId) }} title="show">
+                        <FontAwesomeIcon icon={faEye}  />
                     </button>
-                    <button className="trash" onClick={() => { handleOpenModal('Delete', roleId) }}>
-                        <FontAwesomeIcon icon={faTrash} title="delete" />
+                    <button className="trash" onClick={() => { handleOpenModal('Delete', roleId) }} title="delete" >
+                        <FontAwesomeIcon icon={faTrash} />
                     </button>
                 </div>
                 )

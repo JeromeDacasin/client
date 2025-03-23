@@ -1,12 +1,12 @@
 import './books.css';
 import { useEffect, useState } from "react";
-import { deleteBook, fetchBooks } from "../../api/booksApi";
+import { deleteBook, fetchBooks, retrieveBook } from "../../api/booksApi";
 import { useDebounce } from "../../hooks/useDebounce";
 import { useLoading } from "../../hooks/useLoading";
 import Loader from "../../components/Loader/Loader";
 import ManagementTable from "../../components/common/ManagementTable/ManagementTable";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faCheckCircle, faEdit, faExchangeAlt, faEye, faTrash, faXmarkCircle } from '@fortawesome/free-solid-svg-icons';
+import { faCheckCircle, faEdit, faExchangeAlt, faEye, faFileArrowUp, faTrash, faXmarkCircle } from '@fortawesome/free-solid-svg-icons';
 import useModal from '../../hooks/useModal';
 import CurrencyFormat from '../../utils/MoneyFormat';
 import BookForm from '../../components/Books/BookForm/BookForm';
@@ -14,6 +14,7 @@ import { DataProvider } from '../../context/DataContext';
 import { useAuth } from '../../context/AuthContext';
 import ConfirmationModal from '../../components/Modal/ConfirmationModal/ConfirmationModal';
 import DeleteModal from '../../components/Modal/DeleteModal/DeleteModal';
+import RetrieveModal from '../../components/Modal/RetrieveModal/RetrieveModal';
 
 const BookPage = () => {
 
@@ -116,22 +117,28 @@ const BookPage = () => {
                             isLibrarianOrAdmin && !isArchive ? 
                             (
                                 <>
-                                    <button className="edit" onClick={() =>  { handleOpenModal('Edit', bookId) }}>
-                                        <FontAwesomeIcon icon={faEdit} title="edit"/>
+                                    <button title="edit" className="edit" onClick={() =>  { handleOpenModal('Edit', bookId) }}>
+                                        <FontAwesomeIcon icon={faEdit} />
                                     </button>
-                                    <button className="show" onClick={() =>  { handleOpenModal('Show', bookId) }}>
-                                        <FontAwesomeIcon icon={faEye} title="show" />
+                                    <button title="show"  className="show" onClick={() =>  { handleOpenModal('Show', bookId) }}>
+                                        <FontAwesomeIcon icon={faEye} />
                                     </button>
-                                    <button className="trash" onClick={() => { handleOpenModal('Delete', bookId) }}>
-                                        <FontAwesomeIcon icon={faTrash} title="delete" />
+                                    <button title="archive" className="trash" onClick={() => { handleOpenModal('Delete', bookId) }}>
+                                        <FontAwesomeIcon icon={faTrash}  />
                                     </button>
                                 </>
                             ) : !isLibrarianOrAdmin ? 
                             (
-                                <button className="edit" onClick={() =>  { handleOpenModal('Request', bookId) }}>
-                                    <FontAwesomeIcon icon={faExchangeAlt} title="edit"/>
+                                <button title="edit" className="edit" onClick={() =>  { handleOpenModal('Request', bookId) }}>
+                                    <FontAwesomeIcon icon={faExchangeAlt}/>
                                 </button>
                             ) : null
+                        }   
+                        {
+                            isLibrarianOrAdmin && isArchive &&
+                            <button title="Retreive" className="retreive" onClick={() =>  { handleOpenModal('Retrieve', bookId) }}>
+                            <FontAwesomeIcon icon={faFileArrowUp}/>
+                        </button>
                         }
                         
                         
@@ -223,7 +230,7 @@ const BookPage = () => {
                     </div>
                 )
             }
-            {openModal && action !== 'Delete' && (
+            {openModal && (action !== 'Delete' && action !== 'Retrieve') && (
                 ['Librarian', 'Admin'].includes(user.user) ? (
                     <BookForm 
                         closeModal={handleCloseModal}
@@ -249,6 +256,18 @@ const BookPage = () => {
                         closeModal={handleCloseModal}
                         id={id}
                         onDelete={deleteBook}
+                        onUpdate={handleDeleteFromUI}
+                    />
+                )
+            }
+            {
+                openModal && ['Librarian', 'Admin'].includes(user.user) 
+                && action === 'Retrieve' && 
+                (
+                    <RetrieveModal 
+                        closeModal={handleCloseModal}
+                        id={id}
+                        onRetrieve={retrieveBook}
                         onUpdate={handleDeleteFromUI}
                     />
                 )

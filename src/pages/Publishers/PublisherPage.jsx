@@ -88,14 +88,14 @@ const PublisherPage = () => {
                 const publisherId = cell.row.original.id
                 return (
                     <div className="actions">
-                    <button className="edit" onClick={() =>  { handleOpenModal('Edit', publisherId) }}>
-                        <FontAwesomeIcon icon={faEdit} title="edit"/>
+                    <button className="edit" onClick={() =>  { handleOpenModal('Edit', publisherId) }}  title="edit">
+                        <FontAwesomeIcon icon={faEdit}/>
                     </button>
-                    <button className="show" onClick={() =>  { handleOpenModal('Show', publisherId) }}>
-                        <FontAwesomeIcon icon={faEye} title="show" />
+                    <button className="show" onClick={() =>  { handleOpenModal('Show', publisherId) }} title="show">
+                        <FontAwesomeIcon icon={faEye}  />
                     </button>
-                    <button className="trash" onClick={() => { handleOpenModal('Delete', publisherId) }}>
-                        <FontAwesomeIcon icon={faTrash} title="delete" />
+                    <button className="trash" onClick={() => { handleOpenModal('Delete', publisherId) }} title="delete" >
+                        <FontAwesomeIcon icon={faTrash} />
                     </button>
                 </div>
                 )

@@ -4,10 +4,17 @@ import { adminMenu, userMenu } from './sideMenuData';
 import logo from './../../assets/logo.png';
 import { NavLink } from 'react-router-dom';
 import { useAuth } from '../../context/AuthContext';
+import { faArrowRightFromBracket } from '@fortawesome/free-solid-svg-icons';
 
 const SideMenu = ({ isOpen }) => {
 
-    const {user} = useAuth();
+    const {user, logout} = useAuth();
+
+    const handleLogout  = () => {
+        logout();
+    }
+    
+    
 
     return (
         <div id="side-menu" className={isOpen ? 'open' : ''}>
@@ -55,6 +62,10 @@ const SideMenu = ({ isOpen }) => {
                     )
                 }
                 
+            </div>
+            <div className="logout-container">
+               
+                <button onClick={() => handleLogout()} className="logout-button"> <FontAwesomeIcon icon={faArrowRightFromBracket}/>  Logout</button>
             </div>
         </div>
     );

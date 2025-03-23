@@ -90,14 +90,14 @@ const Department = () => {
                 const departmentId = cell.row.original.id
                 return (
                     <div className="actions">
-                    <button className="edit" onClick={() =>  { handleOpenModal('Edit', departmentId) }}>
-                        <FontAwesomeIcon icon={faEdit} title="edit"/>
+                    <button className="edit" onClick={() =>  { handleOpenModal('Edit', departmentId) }} title="edit">
+                        <FontAwesomeIcon icon={faEdit} />
                     </button>
-                    <button className="show" onClick={() =>  { handleOpenModal('Show', departmentId) }}>
-                        <FontAwesomeIcon icon={faEye} title="show" />
+                    <button className="show" onClick={() =>  { handleOpenModal('Show', departmentId) }} title="show" >
+                        <FontAwesomeIcon icon={faEye} />
                     </button>
-                    <button className="trash" onClick={() => { handleOpenModal('Delete', departmentId) }}>
-                        <FontAwesomeIcon icon={faTrash} title="delete" />
+                    <button className="trash" onClick={() => { handleOpenModal('Delete', departmentId) }} title="delete">
+                        <FontAwesomeIcon icon={faTrash} />
                     </button>
                 </div>
                 )

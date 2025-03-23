@@ -9,7 +9,7 @@
 .table {
     width: 75vw;
     border-collapse: collapse;
-    background: rgba(255, 255, 255, 0.1); /* Very light frosted effect */
+    background: rgba(255, 255, 255, 0.1);
     backdrop-filter: blur(10px);
     border-radius: 10px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.15);
@@ -18,26 +18,26 @@
 .table th, .table td {
     padding: 12px;
     border: 3px solid rgba(255, 255, 255, 0.4); 
-    background: rgba(255, 255, 255, 0.2); /* Subtle glassy effect */
-    color: #333; /* Dark gray for readability */
+    background: rgba(255, 255, 255, 0.2); 
+    color: #333; 
 }
 
 .table th {
     font-weight: bold;
-    color: #333; /* Dark gray for header text */
-    background: rgba(220, 220, 220, 0.5); /* Soft light gray header with opacity */
+    color: #333;
+    background: rgba(220, 220, 220, 0.5); 
 }
 
 .table tr:nth-child(even) {
-    background: rgba(240, 240, 240, 0.6); /* Light gray for even rows */
+    background: rgba(240, 240, 240, 0.6);
 }
 
 .table tr:nth-child(odd) {
-    background: rgba(210, 210, 210, 0.6); /* Slightly darker gray for odd rows */
+    background: rgba(210, 210, 210, 0.6); 
 }
 
 .table td {
-    color: #222; /* Dark text for cells */
+    color: #222; 
 }
 
 .table tr:hover {
@@ -83,13 +83,6 @@
     justify-content: space-between;
 }
 
-/* .books-input .search-books {
-    margin-top: 2px;
-    padding: 10px;
-    border-radius: 5px
-} */
-
-
 .pagination {
     display: flex;
     justify-content: center;
@@ -102,13 +95,22 @@
 .pagination button {
     padding: 8px 15px;
     border-radius: 5px;
-    background: rgba(13, 110, 253, 0.7);
     color: #fff;
     border: 1px solid rgba(255, 255, 255, 0.3);
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
     backdrop-filter: blur(5px);
     transition: all 0.3s ease-in-out;
 }
+
+.pagination .btn-last, .pagination .btn-first {
+    background-color: rgba(230, 243, 55, 0.9);
+    color: #000;
+}
+
+.pagination .btn-mid {
+    background: rgba(13, 110, 253, 0.7);
+}
+
 
 .pagination button:hover {
     cursor: pointer;
@@ -199,6 +201,15 @@
     box-shadow: 0 0 8px rgba(220, 53, 69, 0.7);
 }
 
+.retreive {
+    background-color: #28a745;
+    color: white;
+    border: 2px solid #218838; 
+}
+.retreive:hover {
+    background-color: #218838;
+    box-shadow: 0 0 8px rgba(40, 167, 69, 0.7);
+}
 .table-loader {
     position: absolute;
     top: 50%;

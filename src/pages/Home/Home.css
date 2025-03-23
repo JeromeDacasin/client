@@ -6,21 +6,91 @@
     height: 100vh;
 }
 
-.home .card-home {
-    background: rgba(255, 255, 255, 0.15);
-    backdrop-filter: blur(10px); 
+
+/* Container for clickable cards */
+.module-cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); /* Responsive grid */
+    gap: 20px;
+    max-width: 600px;
+    margin-top: 20px;
+}
+
+/* Styling for each card */
+.card {
+    background: rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
     border-radius: 10px;
-    padding: 70px 30px;
+    padding: 20px;
     text-align: center;
-    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.3);
-    border: 1px solid rgba(255, 255, 255, 0.2);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    cursor: pointer;
+    transition: transform 0.2s ease-in-out, box-shadow 0.2s;
 }
 
-.home .card-home h2, .home .card-home h3 {
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
+}
+
+.card h3 {
+    margin: 0;
+    font-size: 1.2rem;
     color: #333;
-    font-size: 2rem;
-    text-shadow: 1px 1px 5px rgba(0, 0, 0, 0.3); 
-    text-transform: uppercase;
 }
 
+
+.advisory {
+    position: relative;
+    top: -120px;
+    text-align: center;
+    padding: 30px;  
+    background: rgba(255, 255, 255, 0.15); /* Transparent white */
+    backdrop-filter: blur(15px); /* Glass effect */
+    border-radius: 10px;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    margin: 0 auto; /* Centers the advisory div */
+    width: fit-content; /* Ensures it fits the content */
+    display: block; /* Places it below the title */
+}
+
+.health-advisory-title {
+    position: absolute;
+    top: 90px;
+    left: 275px;
+    font-size: 24px;
+    font-weight: bold;
+    color: black;
+    z-index: 10; 
+}
+
+
+.advisory h2 {
+    font-size: 24px;
+    font-weight: bold;
+    color: #000;
+    margin-bottom: 20px;
+}
+
+.advisory-content {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+.advisory-content img {
+    width: 80%;
+    max-width: 600px; 
+    height: auto;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    transition: transform 0.3s ease-in-out;
+}
+
+.advisory-content img:hover {
+    transform: scale(1.1); 
+}

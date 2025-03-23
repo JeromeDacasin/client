@@ -1,4 +1,4 @@
-import { Outlet } from "react-router-dom";
+import { Outlet, useLocation } from "react-router-dom";
 import { useAuth } from "./context/AuthContext.jsx";
 import SideMenu from "./components/SideMenu/SideMenu.jsx";
 import './App.css';
@@ -11,6 +11,8 @@ import ChangePasswordModal from "./components/Modal/ChangePassword/ChangePasswor
 
 
 function App() {
+
+  const location = useLocation();
   const { user, logout } = useAuth();
   const [isMenuOpen, setIsMenuOpen] = useState(false);  
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
@@ -45,12 +47,21 @@ function App() {
   return (
     <div className="App">
       <div className="layout">
+        
         {user && (
           <div>
+              {location.pathname === "/home" && 
+                (['Admin', 'Librarian'].includes(user.user) ? (
+                  <h1 className="welcome-message">Welcome, {user.fullname}</h1>
+                ) : (
+                  <h1 className="welcome-message">Welcome to the Sta. Catalina Library !</h1>
+                ))
+              }
             <BurgerMenu toggleMenu={toggleMenu} isOpen={isMenuOpen}/> 
             <SideMenu isOpen={isMenuOpen} /> 
               <div className={`user-profile ${isDropdownOpen ? "open" : ""}`} ref={dropdownRef}>
               <span onClick={() => setIsDropdownOpen(!isDropdownOpen)}>{user.fullname}</span>
+              
               {isDropdownOpen && (
                 <div className="user-dropdown">
                   <button onClick={() => handleOpenModal()}>Change Password</button>
