@@ -54,7 +54,7 @@ function App() {
                 (['Admin', 'Librarian'].includes(user.user) ? (
                   <h1 className="welcome-message">Welcome, {user.fullname}</h1>
                 ) : (
-                  <h1 className="welcome-message">Welcome to the Sta. Catalina Library !</h1>
+                  <h1 className="welcome-message"></h1>
                 ))
               }
             <BurgerMenu toggleMenu={toggleMenu} isOpen={isMenuOpen}/> 
