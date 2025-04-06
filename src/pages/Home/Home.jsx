@@ -21,9 +21,9 @@ const Home = () => {
 
     return (
         <div className='home'>
-            <h1 className="welcome-message">Welcome to the Sta. Catalina Library !</h1>
             { !(user.user === 'Librarian' || user.user === 'Admin') ? (
                 <>
+                <h1 className="welcome-message">Welcome to the Sta. Catalina Library !</h1>
                     <div className="health-advisory-container">
                         <h2 className="health-advisory-title">Health Advisory</h2>
                         <div className="advisory">
@@ -45,7 +45,8 @@ const Home = () => {
                     </div>
                 </>
             ) : (
-                <div className="module-cards">
+                <div className="module-container">
+                    <div className="module-cards">
                     <div className="card" onClick={() => handleCardClick('/requests')}>
                         <h3>Requests</h3>
                     </div>
@@ -54,6 +55,7 @@ const Home = () => {
                     </div>
                     <div className="card" onClick={() => handleCardClick('/histories')}>
                         <h3>History</h3>
+                    </div>
                     </div>
                 </div>
             )}

@@ -10,6 +10,7 @@ import { deleteUser, fetchUsers } from '../../api/usersApi';
 import UserForm from '../../components/Users/UserForm/UserForm';
 import Loader from '../../components/Loader/Loader';
 import DeleteModal from '../../components/Modal/DeleteModal/DeleteModal';
+import ShowUser from '../../components/common/Button/ShowButton/ShowUser';
 
 
 const UsersPage = ({roleId, title}) => {
@@ -21,13 +22,21 @@ const UsersPage = ({roleId, title}) => {
     const [search, setSearch] = useState(null);
     const [page, setPage] = useState(1);
     const debounceSearch = useDebounce(search, 1000);
+    const [userCredentials, setUserCredentials] = useState('');
+    const [visibleModal, setVisibleModal] = useState(false);
     let paginate = 1;
+
 
     const handleUpdate = updatedUsers => {
         setUsers( prevData => ({
                 ...prevData,
                 data: prevData.data.map(user => user.id === updatedUsers.id ? updatedUsers : user)  
         }))
+    }
+
+    const handleVisibleUser = (status, user = null) => {
+        setUserCredentials(user)
+        setVisibleModal(status)
     }
 
     const handleDeleteFromUI = (deletedId) => {
@@ -150,6 +159,7 @@ const UsersPage = ({roleId, title}) => {
                     onUpdate={handleUpdate}
                     title={title}
                     roleId={roleId}
+                    userCredentials={handleVisibleUser}
                 />
             }
             {
@@ -163,6 +173,11 @@ const UsersPage = ({roleId, title}) => {
                     />
                 )
             }
+            {
+            visibleModal && (
+                <ShowUser handleUser={handleVisibleUser} userCredentials={userCredentials}/>
+            )}
+
         </div>
     )
 }

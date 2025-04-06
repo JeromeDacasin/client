@@ -20,7 +20,6 @@ const ManagementTable = ({
     onExport
 }) => {
     const { user } = useAuth();
-    console.log(status);
     return (
         <div className="management-table">
             <div className="table-options">

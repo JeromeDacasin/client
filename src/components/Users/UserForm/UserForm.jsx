@@ -6,7 +6,7 @@ import { useLoading } from '../../../hooks/useLoading';
 import { createUser, fetchUser, updateUser } from '../../../api/usersApi';
 import { showAlertError, showAlertSuccess } from '../../../utils/toastify';
 
-const UserForm = ({closeModal, action, id, onUpdate, title, roleId}) => {
+const UserForm = ({closeModal, action, id, onUpdate, title, roleId, userCredentials}) => {
 
     const [data, setData] = useState({
         first_name: "",
@@ -16,7 +16,7 @@ const UserForm = ({closeModal, action, id, onUpdate, title, roleId}) => {
         email: "",
         contact_number: "",
         student_number: "",
-        is_generated_student_number: 0
+        is_generated_student_number: ''
 
     });
     const [loading, setLoading] = useLoading();
@@ -33,7 +33,10 @@ const UserForm = ({closeModal, action, id, onUpdate, title, roleId}) => {
             const response = await apiCall(updatedData);
             setData(response);
             onUpdate(data);
+
             showAlertSuccess(response.message);
+            action === 'Edit' ? userCredentials(false) : userCredentials(true, response.data);
+            
         } catch(error) {
            
             showAlertError(error.response.data.message)
@@ -171,8 +174,8 @@ const UserForm = ({closeModal, action, id, onUpdate, title, roleId}) => {
                                                         <input
                                                             type='radio'
                                                             name='is_generated_student_number'
-                                                            value='auto'
-                                                            checked={data.is_generated_student_number === 1}
+                                                            value={1}
+                                                            checked={data.is_generated_student_number == 1}
                                                             onChange={handleChange}
                                                         />
                                                         Auto-generate
@@ -181,14 +184,14 @@ const UserForm = ({closeModal, action, id, onUpdate, title, roleId}) => {
                                                         <input
                                                             type='radio'
                                                             name='is_generated_student_number'
-                                                            value='manual'
-                                                            checked={data.is_generated_student_number === 0}
+                                                            value={0}
+                                                            checked={data.is_generated_student_number == 0}
                                                             onChange={handleChange}
                                                         />
                                                         Manual
                                                     </label>
                                                 </div>
-                                                {data.is_generated_student_number === 0 && (
+                                                {data.is_generated_student_number == 0 && (
                                                     <div className={formStyles['form-group']}>
                                                         <label htmlFor='student_number'>Student Number</label>
                                                         <input
