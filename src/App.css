@@ -19,7 +19,8 @@
     flex: 1;
     height: 100%;
     overflow-y: auto;
-    background: linear-gradient(to right, #58554d, #22563d, #11ac8a);
+    background: white;
+    /* background: linear-gradient(to right, #58554d, #22563d, #11ac8a); */
 }
 
 .user-profile {
@@ -98,6 +99,21 @@
     padding: 8px 15px;
     border-radius: 8px;
     white-space: nowrap; 
+}
+
+.user-info {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    cursor: pointer;
+}
+
+.profile-pic {
+    width: 35px;
+    height: 35px;
+    border-radius: 40%;
+    object-fit: cover;
+    border: 2px solid #ddd;
 }
 
 

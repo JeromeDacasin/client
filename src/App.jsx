@@ -8,6 +8,8 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowRightFromBracket } from "@fortawesome/free-solid-svg-icons";
 import useModal from "./hooks/useModal.jsx";
 import ChangePasswordModal from "./components/Modal/ChangePassword/ChangePasswordModal.jsx";
+import femalePic from './assets/female.jpg';
+import malePic from './assets/male.jpg';
 
 
 function App() {
@@ -59,14 +61,22 @@ function App() {
               }
             <BurgerMenu toggleMenu={toggleMenu} isOpen={isMenuOpen}/> 
             <SideMenu isOpen={isMenuOpen} /> 
-              <div className={`user-profile ${isDropdownOpen ? "open" : ""}`} ref={dropdownRef}>
-              <span onClick={() => setIsDropdownOpen(!isDropdownOpen)}>{user.fullname}</span>
-              
+            <div className={`user-profile ${isDropdownOpen ? "open" : ""}`} ref={dropdownRef}>
+              <div className="user-info" onClick={() => setIsDropdownOpen(!isDropdownOpen)}>
+                <img
+                  src={malePic}
+                  alt="Profile"
+                  className="profile-pic"
+                />
+                <span>{user.fullname}</span>
+              </div>
+
               {isDropdownOpen && (
                 <div className="user-dropdown">
-                  <button onClick={() => handleOpenModal()}>Change Password</button>
-                  <button onClick={() => handleLogout()} className="logout-btn">
-                    <FontAwesomeIcon icon={faArrowRightFromBracket}/> LOGOUT</button>
+                  <button onClick={handleOpenModal}>Change Password</button>
+                  <button onClick={handleLogout} className="logout-btn">
+                    <FontAwesomeIcon icon={faArrowRightFromBracket} /> LOGOUT
+                  </button>
                 </div>
               )}
             </div>

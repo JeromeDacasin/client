@@ -113,7 +113,8 @@ const Department = () => {
                 (<Loader/>) : 
                 (   
                     <div> 
-                        {!loading && <h1>DEPARTMENTS</h1>}
+                        {!loading}
+                        <h1>DEPARTMENTS</h1>
                         <ManagementTable 
                             title='Department' 
                             data={departments}

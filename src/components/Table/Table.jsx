@@ -1,7 +1,8 @@
 import { useReactTable, getCoreRowModel, flexRender } from "@tanstack/react-table";
 import './Table.css';
+import Loader from "../Loader/Loader";
 
-const Table = ({columns, data, onPageChange}) => {
+const Table = ({columns, data, onPageChange, loading}) => {
 
     const table = useReactTable({
         data: data.data,
@@ -26,7 +27,9 @@ const Table = ({columns, data, onPageChange}) => {
                     ))}
                 </thead>
                 <tbody>
-                    {table.getRowModel().rows.map(row => (
+                    { loading ? 
+                    <Loader/> :
+                    (table.getRowModel().rows.map(row => (
                         <tr key={row.id}>
                             {row.getVisibleCells().map(cell => (
                                 <td key={cell.id}>
@@ -34,7 +37,7 @@ const Table = ({columns, data, onPageChange}) => {
                                 </td>
                             ))}
                         </tr>
-                    ))}
+                    )))}
                 </tbody>
             </table>
             <div className="pagination">

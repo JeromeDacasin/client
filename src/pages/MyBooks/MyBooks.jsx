@@ -18,8 +18,8 @@ const MyBooksPage = () => {
                 const response = await fetchMyHistories();
                 setData(response.data);
             } catch (error) {
-                console.log(error);
-                return "Something went wrong";
+                return "Something went wrong " + error;
+
             }
         };
 

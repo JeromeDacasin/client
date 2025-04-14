@@ -39,7 +39,6 @@ const BookForm = ({ closeModal, id, action, onUpdate }) => {
                     onUpdate(data)
                     showAlertSuccess(response.message)
                 } catch (error) {
-                    console.log(error)
                     showAlertError("Something went Wrong")
                     return error
                 } finally {

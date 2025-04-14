@@ -4,13 +4,15 @@ import { useEffect, useState } from 'react';
 import { useLoading } from '../../hooks/useLoading';
 import { useDebounce } from '../../hooks/useDebounce';
 import useModal from '../../hooks/useModal';
-import { faEdit, faEye, faTrash } from '@fortawesome/free-solid-svg-icons';
+import { faEdit, faEye, faHistory, faTrash } from '@fortawesome/free-solid-svg-icons';
 import './UsersPage.css';
 import { deleteUser, fetchUsers } from '../../api/usersApi';
 import UserForm from '../../components/Users/UserForm/UserForm';
 import Loader from '../../components/Loader/Loader';
 import DeleteModal from '../../components/Modal/DeleteModal/DeleteModal';
 import ShowUser from '../../components/common/Button/ShowButton/ShowUser';
+import HistoryTableModal from '../../components/Modal/HistoryTableModal/HistoryTableModal';
+import { fetchUserHistory } from '../../api/userHistoryApi';
 
 
 const UsersPage = ({roleId, title}) => {
@@ -24,6 +26,7 @@ const UsersPage = ({roleId, title}) => {
     const debounceSearch = useDebounce(search, 1000);
     const [userCredentials, setUserCredentials] = useState('');
     const [visibleModal, setVisibleModal] = useState(false);
+    const [history, setHistory] = useState(false);
     let paginate = 1;
 
 
@@ -37,6 +40,18 @@ const UsersPage = ({roleId, title}) => {
     const handleVisibleUser = (status, user = null) => {
         setUserCredentials(user)
         setVisibleModal(status)
+    }
+
+    const handleUserHistory = async (userId) => {
+         try {
+
+            const response = await fetchUserHistory(userId, 1);
+            setHistory(response);
+            return response;
+    
+        } catch (error) {
+            return error;
+        }
     }
 
     const handleDeleteFromUI = (deletedId) => {
@@ -113,16 +128,21 @@ const UsersPage = ({roleId, title}) => {
                 const userId = cell.row.original.id
                 return (
                     <div className="actions">
-                    <button className="edit" onClick={() =>  { handleOpenModal('Edit', userId) }} title="edit">
-                        <FontAwesomeIcon icon={faEdit} />
-                    </button>
-                    <button className="show" onClick={() =>  { handleOpenModal('Show', userId) }} title="show" >
-                        <FontAwesomeIcon icon={faEye} />
-                    </button>
-                    <button className="trash" onClick={() => { handleOpenModal('Delete', userId) }} title="delete" >
-                        <FontAwesomeIcon icon={faTrash} />
-                    </button>
-                </div>
+                        <button className="history" onClick={() =>  { handleOpenModal('History', userId) 
+                            handleUserHistory(userId)
+                        }} title="history">
+                            <FontAwesomeIcon icon={faHistory} />
+                        </button>
+                        <button className="edit" onClick={() =>  { handleOpenModal('Edit', userId) }} title="edit">
+                            <FontAwesomeIcon icon={faEdit} />
+                        </button>
+                        <button className="show" onClick={() =>  { handleOpenModal('Show', userId) }} title="show" >
+                            <FontAwesomeIcon icon={faEye} />
+                        </button>
+                        <button className="trash" onClick={() => { handleOpenModal('Delete', userId) }} title="delete" >
+                            <FontAwesomeIcon icon={faTrash} />
+                        </button>
+                    </div>
                 )
             }
         }
@@ -151,7 +171,7 @@ const UsersPage = ({roleId, title}) => {
             }
 
             {
-                openModal && action !== 'Delete' &&
+                openModal && action !== 'Delete' && action !== 'History' &&
                 <UserForm
                     closeModal={() => { handleCloseModal()}}
                     action={action}
@@ -170,6 +190,16 @@ const UsersPage = ({roleId, title}) => {
                         id={id}
                         onDelete={deleteUser}
                         onUpdate={handleDeleteFromUI}
+                    />
+                )
+            }
+            {
+                openModal && action === 'History' && history &&
+                (
+                    <HistoryTableModal
+                        closeModal={handleCloseModal}
+                        id={id}
+                        initialHistory={history}
                     />
                 )
             }
