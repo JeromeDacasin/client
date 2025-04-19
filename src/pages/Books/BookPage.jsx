@@ -15,6 +15,7 @@ import { useAuth } from '../../context/AuthContext';
 import ConfirmationModal from '../../components/Modal/ConfirmationModal/ConfirmationModal';
 import DeleteModal from '../../components/Modal/DeleteModal/DeleteModal';
 import RetrieveModal from '../../components/Modal/RetrieveModal/RetrieveModal';
+import ImportModal from '../../components/Modal/ImportModal/ImportModal';
 
 const BookPage = () => {
 
@@ -40,7 +41,7 @@ const BookPage = () => {
     const handleDeleteFromUI = (deletedId) => {
         setBooks(prevBooks => ({
             ...prevBooks,
-            data: prevBooks.data.filter(book => book.id !== deletedId) // Remove deleted book
+            data: prevBooks.data.filter(book => book.id !== deletedId) 
         }));
     };
 
@@ -54,6 +55,10 @@ const BookPage = () => {
             header: 'ID',
             accessorKey: 'id',
             cell: ({row}) => row.index + 1
+        },
+        {
+            header: 'ACQUISITION ID',
+            accessorKey: 'acquisition_id',
         },
         {
             header: 'TITLE',
@@ -113,6 +118,13 @@ const BookPage = () => {
                 const bookId = cell.row.original.id;
                 return (
                     <div className="actions">
+                        {   
+                            !isArchive &&
+                            <button title="request" className="edit" onClick={() =>  { handleOpenModal('Request', bookId) }}>
+                              <FontAwesomeIcon icon={faExchangeAlt}/>
+                          </button>
+                        }
+                      
                         {
                             isLibrarianOrAdmin && !isArchive ? 
                             (
@@ -129,9 +141,7 @@ const BookPage = () => {
                                 </>
                             ) : !isLibrarianOrAdmin ? 
                             (
-                                <button title="edit" className="edit" onClick={() =>  { handleOpenModal('Request', bookId) }}>
-                                    <FontAwesomeIcon icon={faExchangeAlt}/>
-                                </button>
+                                <></>
                             ) : null
                         }   
                         {
@@ -230,15 +240,23 @@ const BookPage = () => {
                     </div>
                 )
             }
-            {openModal && (action !== 'Delete' && action !== 'Retrieve') && (
-                ['Librarian', 'Admin'].includes(user.user) ? (
+            {openModal && (action === 'Create' || action === 'Edit' || action === 'Show' ) && ['Librarian', 'Admin'].includes(user.user) && 
+                (
                     <BookForm 
                         closeModal={handleCloseModal}
                         action={action}
                         id={id}
                         onUpdate={handleUpdateBook}
                     />
-                ) : (
+                )
+            }
+            {
+                openModal && action === 'Import' && (
+                    <ImportModal closeModal={handleCloseModal}/>
+                )
+            }
+            {
+                openModal && action === 'Request' && (
                     <ConfirmationModal 
                         closeModal={handleCloseModal}
                         action={action}
@@ -247,7 +265,7 @@ const BookPage = () => {
                         message={message}
                     />
                 )
-            )}
+            }
             {
                 openModal && ['Librarian', 'Admin'].includes(user.user) 
                 && action === 'Delete' && 

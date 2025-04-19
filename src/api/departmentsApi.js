@@ -1,9 +1,8 @@
-import axios from 'axios';
-import {headerConfig, viteURI} from './apiConfig';
+import api, {headerConfig, viteURI} from './apiConfig';
 
 
 export const fetchDepartments = async params => {
-    const response = await axios.get(`${viteURI}/departments`, {
+    const response = await api.get(`${viteURI}/departments`, {
         params,
         ...headerConfig
     })
@@ -12,23 +11,23 @@ export const fetchDepartments = async params => {
 }
 
 export const fetchDepartment = async id => {
-    const response = await axios.get(`${viteURI}/departments/${id}`, headerConfig);
+    const response = await api.get(`${viteURI}/departments/${id}`, headerConfig);
     return response.data;
 }
 
 export const updateDepartment = async payload => {
     const { id } = payload;
-    const response = await axios.put(`${viteURI}/departments/${id}`, payload, headerConfig);
+    const response = await api.put(`${viteURI}/departments/${id}`, payload, headerConfig);
     return response.data;
 }
 
 export const createDepartment = async payload => {
-    const response = await axios.post(`${viteURI}/departments`, payload, headerConfig);
+    const response = await api.post(`${viteURI}/departments`, payload, headerConfig);
     return response.data;
 }
 
 export const deleteDepartment = async id => {
-    const response = await axios.delete(`${viteURI}/departments/${id}`, headerConfig);
+    const response = await api.delete(`${viteURI}/departments/${id}`, headerConfig);
     return response.data;
 }
 

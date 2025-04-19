@@ -1,9 +1,8 @@
-import axios from 'axios';
-import {headerConfig, viteURI} from './apiConfig';
+import api, {headerConfig, viteURI} from './apiConfig';
 
 
 export const fetchFines = async params => {
-    const response = await axios.get(`${viteURI}/penalties`, {
+    const response = await api.get(`${viteURI}/penalties`, {
         params,
         ...headerConfig
     })
@@ -12,23 +11,23 @@ export const fetchFines = async params => {
 }
 
 export const fetchPenalty = async id => {
-    const response = await axios.get(`${viteURI}/penalties/${id}`, headerConfig);
+    const response = await api.get(`${viteURI}/penalties/${id}`, headerConfig);
     return response.data;
 }
 
 export const updatePenalty = async payload => {
     const { id } = payload;
-    const response = await axios.put(`${viteURI}/penalties/${id}`, payload, headerConfig);
+    const response = await api.put(`${viteURI}/penalties/${id}`, payload, headerConfig);
     return response.data;
 }
 
 export const createPenalty = async payload => {
-    const response = await axios.post(`${viteURI}/penalties`, payload, headerConfig);
+    const response = await api.post(`${viteURI}/penalties`, payload, headerConfig);
     return response.data;
 }
 
 export const deletePenalty = async id => {
-    const response = await axios.delete(`${viteURI}/penalties/${id}`, headerConfig);
+    const response = await api.delete(`${viteURI}/penalties/${id}`, headerConfig);
     return response.data;
 }
 

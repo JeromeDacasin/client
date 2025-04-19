@@ -64,7 +64,7 @@ function App() {
             <div className={`user-profile ${isDropdownOpen ? "open" : ""}`} ref={dropdownRef}>
               <div className="user-info" onClick={() => setIsDropdownOpen(!isDropdownOpen)}>
                 <img
-                  src={malePic}
+                  src={user.gender === 'male' ? malePic : femalePic}
                   alt="Profile"
                   className="profile-pic"
                 />

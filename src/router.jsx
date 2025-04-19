@@ -15,6 +15,8 @@ import BorrowedBooksPage from "./pages/BorrowedBooks/BorrowedBooksPage";
 import BookPage from "./pages/Books/BookPage";
 import RolePage from "./pages/Roles/RolePage";
 import MyBooksPage from "./pages/MyBooks/MyBooks";
+import HolidayPage from "./components/Settings/Holidays/Holiday";
+import SettingPage from "./pages/Settings/SettingPage";
 
 const router = createBrowserRouter([
     {
@@ -68,9 +70,17 @@ const router = createBrowserRouter([
                         path: "/faculties",
                         element: <UsersPage roleId={4} title='Faculty'/>,
                     },
+                    // {
+                    //     path: "/penalties",
+                    //     element: <PenaltyPage/>,
+                    // },
                     {
-                        path: "/penalties",
-                        element: <PenaltyPage/>,
+                        path: "/holidays",
+                        element: <HolidayPage/>,
+                    },
+                    {
+                        path: "/settings",
+                        element: <SettingPage/>
                     },
                     {
                         path: "/roles",

@@ -1,0 +1,7 @@
+.setting-page {
+    display: flex;
+    justify-content: center;
+    min-height: 100vh;
+    margin-top: 80px;
+}
+

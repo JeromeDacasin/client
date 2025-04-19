@@ -11,7 +11,6 @@ import { useDebounce } from "../../hooks/useDebounce";
 import Loader from "../../components/Loader/Loader";
 import PenaltyForm from "../../components/Penalties/PenaltyForm/PenaltyForm";
 import DeleteModal from "../../components/Modal/DeleteModal/DeleteModal";
-import { deleteRole } from "../../api/roleApi";
 
 
 const PenaltyPage = () => {

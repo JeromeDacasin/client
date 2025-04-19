@@ -4,6 +4,7 @@ import Loader from "../../Loader/Loader";
 import Table from "../../Table/Table";
 import CreateButton from "../Button/CreateButton/CreateButton";
 import ExportButton from "../Button/ExportButton/ExportButton";
+import ImportButton from "../Button/ImportButton/ImportButton";
 import SearchInput from "../Input/SearchInput/SearchInput";
 import './ManagementTable.css';
 
@@ -28,8 +29,14 @@ const ManagementTable = ({
                 </div>
                 {['Admin', 'Librarian'].includes(user.user) && title !== 'Books or Name' && !archive &&  (
                     <div className="create">
+                        {
+                            title === 'Books' && (
+                                <ImportButton onCreate={onCreate}/>
+                            )
+                        }
                         <CreateButton title={title} onCreate={onCreate}/>
                     </div> 
+                   
                 )}
                 {['Admin', 'Librarian'].includes(user.user) && status === 'returned' && !archive &&  (
                     <div className="create">

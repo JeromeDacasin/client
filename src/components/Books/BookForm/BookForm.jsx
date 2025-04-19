@@ -22,6 +22,7 @@ const BookForm = ({ closeModal, id, action, onUpdate }) => {
         department_id: "",
         author_id: "",
         is_active: 0,
+        acquisition_id: "",
         author: ""
     });
 
@@ -192,6 +193,17 @@ const BookForm = ({ closeModal, id, action, onUpdate }) => {
           placeholder="Enter Remaining Quantity"
           required
           min="0"
+        />
+      </div>
+      <div className='book-input-container'>
+        <label htmlFor="acquisition_id">Acquisition ID</label>
+        <input 
+          name="acquisition_id"
+          className="book-input"
+          onChange={handleChange}
+          value={data.acquisition_id}
+          disabled={edit}
+          placeholder=""
         />
       </div>
     </div>

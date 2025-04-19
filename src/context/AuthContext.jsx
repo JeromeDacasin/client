@@ -22,7 +22,8 @@ export const AuthProvider = ({children}) => {
             const authToken = response.data.data.token;
             const userObj = {
                 user: response.data.data.role,
-                fullname: response.data.data.full_name
+                fullname: response.data.data.full_name,
+                gender: response.data.data.gender
 
             };
            

@@ -1,0 +1,85 @@
+.dashboard, .client-dashboard {
+    width: 90%;
+    height: 100vh;
+    padding-top: 50px;
+}
+
+.report-section {
+    margin-bottom: 90px;
+}
+
+.report-title {
+    font-size: 20px;
+    margin-bottom: 15px;
+    color: #333;
+}
+
+.report-cards {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+}
+
+.report-card {
+    flex: 1 1 180px;
+    padding: 15px;
+    border-radius: 10px;
+    color: white;
+    text-align: center;
+    font-weight: bold;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
+}
+
+.report-count {
+    font-size: 28px;
+    margin-bottom: 5px;
+}
+
+.report-card:hover {
+    transform: scale(1.1);
+}
+
+.report-label {
+    font-size: 14px;
+}
+
+/* Color classes */
+.blue {
+    background-color: #3b82f6;
+}
+
+.green {
+    background-color: #10b981;
+}
+
+.yellow {
+    background-color: #facc15;
+    color: #333;
+}
+
+.red {
+    background-color: #ef4444;
+}
+
+.orange {
+    background-color: #f59e0b;
+}
+
+/* Advisory styles */
+.health-advisory-container {
+    margin-bottom: 30px;
+}
+
+.health-advisory-title {
+    font-size: 20px;
+    margin-bottom: 10px;
+}
+
+.advisory-content img {
+    height: 150px;
+    margin-right: 10px;
+    cursor: pointer;
+    border-radius: 8px;
+    box-shadow: 0 0 5px rgba(0,0,0,0.2);
+}

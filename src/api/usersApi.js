@@ -1,8 +1,7 @@
-import axios from "axios";
-import { headerConfig, viteURI } from "./apiConfig";
+import api, { headerConfig, viteURI } from "./apiConfig";
 
 export const fetchUsers = async payload => {
-    const response = await axios.get(`${viteURI}/users`, {
+    const response = await api.get(`${viteURI}/users`, {
         params: payload,
         ...headerConfig
     });
@@ -10,28 +9,28 @@ export const fetchUsers = async payload => {
 }
 
 export const fetchUser = async id => {
-    const response = await axios.get(`${viteURI}/users/${id}`, headerConfig);
+    const response = await api.get(`${viteURI}/users/${id}`, headerConfig);
     return response.data;
 }
 
 export const updateUser = async payload => {
     const { id } = payload;
-    const response = await axios.put(`${viteURI}/users/${id}`, payload, headerConfig);
+    const response = await api.put(`${viteURI}/users/${id}`, payload, headerConfig);
     return response.data;
 }
 
 
 export const createUser = async payload => {
-    const response = await axios.post(`${viteURI}/users`, payload, headerConfig);
+    const response = await api.post(`${viteURI}/users`, payload, headerConfig);
     return response.data;
 }
 
 export const deleteUser = async id => {
-    const response = await axios.delete(`${viteURI}/users/${id}`, headerConfig);
+    const response = await api.delete(`${viteURI}/users/${id}`, headerConfig);
     return response.data;
 }
 
 export const changePassword = async payload => {
-    const response = await axios.put(`${viteURI}/user/password`, payload, headerConfig);
+    const response = await api.put(`${viteURI}/user/password`, payload, headerConfig);
     return response.data;
 }

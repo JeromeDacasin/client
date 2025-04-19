@@ -1,0 +1,106 @@
+.embla-wrapper {
+  display: flex;
+  flex-direction: column; 
+  align-items: center; 
+}
+
+.embla__below-data {
+  margin-top: 15px;
+  padding: 10px 20px;
+  background-color: #f9f9f9; 
+  border-radius: 8px;
+  text-align: center;
+  color: #555;
+  font-size: 1.2rem;
+}
+
+
+.embla {
+  position: relative;
+  overflow: hidden;
+  width: 100%;
+  max-width: 800px;
+  margin: 3rem auto;
+  background: #e6f7e9; 
+  border-radius: 20px;
+  padding: 20px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); 
+}
+
+.embla__viewport {
+  overflow: hidden;
+  width: 100%;
+}
+
+.embla__container {
+  display: flex;
+  transition: transform 0.3s ease;
+}
+
+.embla__slide {
+  position: relative;
+  min-width: 100%;
+  padding: 10px;
+  box-sizing: border-box;
+}
+
+.embla__slide__inner {
+  border-radius: 10px;
+  overflow: hidden; 
+}
+
+.embla__slide__img {
+  display: block; 
+  width: 100%;
+  height: auto;
+  border-radius: inherit; 
+}
+
+.embla__dots {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 20px;
+}
+
+.embla__dot {
+  background-color: transparent;
+  cursor: pointer;
+  position: relative;
+  border: 2px solid #aed581; 
+  width: 14px;
+  height: 14px; 
+  margin-right: 7.5px;
+  margin-left: 7.5px;
+  padding: 0;
+  border-radius: 50%;
+  outline: none; 
+  transition: background-color 0.2s ease;
+}
+
+.embla__dot:after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background-color: transparent; 
+}
+
+.embla__dot.is-selected {
+  background-color: #689f38; 
+  border-color: #689f38;
+}
+
+.embla__dot.is-selected:after {
+  background-color: #fff;
+}
+
+/* Optional: Style the container the carousel is in for better overall presentation */
+/* .your-page-or-component {
+  background-color: #f4f4f4;
+  padding: 20px;
+} */

@@ -61,8 +61,9 @@ const RoleForm = ({closeModal, action, id, onUpdate}) => {
                 setLoading(false);
             }
         } 
-
-        handleFetchRole(id);
+        if (id) {
+            handleFetchRole(id);    
+        }
 
     }, [setLoading, id]);
 
