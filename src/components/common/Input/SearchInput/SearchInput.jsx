@@ -13,7 +13,7 @@ const SearchInput = ({title, onChange}) => {
             className='search-input'
             type="search"
             onChange={handleChange}
-            placeholder={`Search ${title} ...`}
+            placeholder={`Search for ${title}`}
         />
     )
 }

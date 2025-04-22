@@ -34,8 +34,8 @@ const DeleteModal = ({closeModal, id, onDelete, onUpdate}) => {
             <div className="delete-section">
                 <h4>Are you sure you want to Delete / Archive this ?</h4>
                 <div className="delete-button">
-                    <button type="submit" className='submit' onClick={() => handleDelete()}>Submit</button>
-                    <button type="submit" className='cancel' onClick={() => closeModal()}>Cancel</button>
+                    <button type="submit" className='submit' onClick={() => handleDelete()}>Yes</button>
+                    <button type="submit" className='cancel' onClick={() => closeModal()}>No</button>
                 </div>
             </div>}
         </div>

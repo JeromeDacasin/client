@@ -103,13 +103,14 @@ const UsersPage = ({roleId, title}) => {
         //     accessorKey: 'username'
         // },
         {
-            header: 'FIRSTNAME',
-            accessorKey: 'first_name'
-        },
-        {
             header: 'LASTNAME',
             accessorKey: 'last_name'
         },
+        {
+            header: 'FIRSTNAME',
+            accessorKey: 'first_name'
+        },
+       
         {
             header: 'GENDER',
             accessorKey: 'gender'
@@ -156,7 +157,7 @@ const UsersPage = ({roleId, title}) => {
                 (<Loader/>) : 
                 (   
                     <div> 
-                        {!loading &&  <h1 className='users-title'>{title}</h1>}
+                        {!loading &&  <h1 className='users-title'>{title}s</h1>}
                         <ManagementTable 
                             title={title} 
                             data={users}

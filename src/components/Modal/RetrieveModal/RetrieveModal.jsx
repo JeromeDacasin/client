@@ -34,8 +34,8 @@ const RetrieveModal = ({closeModal, id, onRetrieve, onUpdate}) => {
             <div className="retrieve-section">
                 <h4>Are you sure you want to retrieve this?</h4>
                 <div className="retrieve-button">
-                    <button type="submit" className='submit' onClick={() => handleRetrieve()}>Submit</button>
-                    <button type="submit" className='cancel' onClick={() => closeModal()}>Cancel</button>
+                    <button type="submit" className='submit' onClick={() => handleRetrieve()}>Yes</button>
+                    <button type="submit" className='cancel' onClick={() => closeModal()}>No</button>
                 </div>
             </div>}
         </div>

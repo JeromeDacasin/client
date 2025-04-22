@@ -75,9 +75,9 @@ const ConfirmationModal = ({closeModal, action, id, onUpdate, message}) => {
                         style={{ background: action === 'Deny' ?  '#f44336' : '#4CAF50', color: '#fff' }}
                         onClick={() => handleSubmit()}
                     >
-                        {action}
+                        Yes
                     </button>
-                    <button type="submit" className={confirmationStyles['cancel']} onClick={() => closeModal()}>Cancel</button>
+                    <button type="submit" className={confirmationStyles['cancel']} onClick={() => closeModal()}>No</button>
                 </div>
             </div>}
         </div>

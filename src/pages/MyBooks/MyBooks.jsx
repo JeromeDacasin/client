@@ -30,20 +30,27 @@ const MyBooksPage = () => {
     return (
         <div className="card-container">
             <h2>Borrowed Books</h2>
-
-            <select className="filter" value={filter} onChange={(e) => setFilter(e.target.value)}>
-                {uniqueStatuses.map((status) => (
+            <section className="filter-container">
+                <select
+                    id="status-filter"
+                    className="filter"
+                    value={filter}
+                    onChange={(e) => setFilter(e.target.value)}
+                >
+                    {uniqueStatuses.map((status) => (
                     <option key={status} value={status}>
                         {status.charAt(0).toUpperCase() + status.slice(1).toLowerCase()}
                     </option>
-                ))}
-            </select>
+                    ))}
+                </select>
+                </section>
+           
 
             <div className="card-list">
                 {filteredBooks.length > 0 ? (
                     filteredBooks.map((book, index) => {
                         const statusClass = book.status.toLowerCase().replace(/\s+/g, "-");
-                        const formattedStatus = book.status.charAt(0).toUpperCase() + book.status.slice(1).toLowerCase();
+                        // const formattedStatus = book.status.charAt(0).toUpperCase() + book.status.slice(1).toLowerCase();
                         const isOverdue = book.status === "borrowed" && book.must_return_date < today;
                         
 

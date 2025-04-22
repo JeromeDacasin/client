@@ -146,7 +146,7 @@ const BookPage = () => {
                         }   
                         {
                             isLibrarianOrAdmin && isArchive &&
-                            <button title="Retreive" className="retreive" onClick={() =>  { handleOpenModal('Retrieve', bookId) }}>
+                            <button title="Retrieve" className="retreive" onClick={() =>  { handleOpenModal('Retrieve', bookId) }}>
                             <FontAwesomeIcon icon={faFileArrowUp}/>
                         </button>
                         }
