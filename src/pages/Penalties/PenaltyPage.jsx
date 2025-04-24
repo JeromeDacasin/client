@@ -120,7 +120,7 @@ const PenaltyPage = () => {
             (<Loader/>) :
             (
                 <div>
-                    <h1>FINES</h1>
+                    <h1>Fines Per Day</h1>
 
                 <ManagementTable
                     title='Fines'

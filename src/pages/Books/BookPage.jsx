@@ -270,11 +270,12 @@ const BookPage = () => {
                 openModal && ['Librarian', 'Admin'].includes(user.user) 
                 && action === 'Delete' && 
                 (
-                    <DeleteModal 
+                    <DeleteModal
                         closeModal={handleCloseModal}
                         id={id}
                         onDelete={deleteBook}
                         onUpdate={handleDeleteFromUI}
+                        action={action}
                     />
                 )
             }

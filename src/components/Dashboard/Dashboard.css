@@ -46,11 +46,13 @@
 
 /* Color classes */
 .blue {
-    background-color: #3b82f6;
+    background-color: #92C5FC;
+    color: #333;
 }
 
 .green {
-    background-color: #10b981;
+    background-color: #A7F3CF;
+    color: #333;
 }
 
 .yellow {
@@ -59,11 +61,13 @@
 }
 
 .red {
-    background-color: #ef4444;
+    background-color: #FECBCA;
+    color: #333;
 }
 
 .orange {
-    background-color: #f59e0b;
+    background-color: #FDE689;
+    color: #333;
 }
 
 /* Advisory styles */

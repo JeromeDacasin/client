@@ -5,7 +5,7 @@ import { useLoading } from '../../../hooks/useLoading';
 import Loader from '../../Loader/Loader';
 
 
-const DeleteModal = ({closeModal, id, onDelete, onUpdate}) => {
+const DeleteModal = ({closeModal, id, onDelete, onUpdate, action = null}) => {
 
     const [loading, setLoading] = useLoading();
 
@@ -32,7 +32,7 @@ const DeleteModal = ({closeModal, id, onDelete, onUpdate}) => {
             {loading && <Loader/>}
             { !loading &&
             <div className="delete-section">
-                <h4>Are you sure you want to Delete / Archive this ?</h4>
+                <h4>Are you sure you want to {action ? 'archive' : 'delete'} this ?</h4>
                 <div className="delete-button">
                     <button type="submit" className='submit' onClick={() => handleDelete()}>Yes</button>
                     <button type="submit" className='cancel' onClick={() => closeModal()}>No</button>
