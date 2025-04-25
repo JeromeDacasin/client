@@ -4,12 +4,15 @@ import { useAuth } from '../context/AuthContext.jsx';
 import { useNavigate } from 'react-router-dom';
 import { showAlertError } from '../utils/toastify';
 import logo from './../assets/logo.png';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons';
 const Login = () => {
 
     const { login } = useAuth();
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
     const [error, setError]       = useState(false);
+    const [showPassword, setShowPassword] = useState(false);
     const navigate = useNavigate();
 
     const payload = {
@@ -30,6 +33,10 @@ const Login = () => {
         setError(false);
         navigate('/home')
     }
+
+    const togglePasswordVisibility = () => {
+        setShowPassword(!showPassword);
+    };
    
 
     return (
@@ -60,7 +67,8 @@ const Login = () => {
                             <label htmlFor="">Username</label>
                         </div>
                         <div className={`${style['input-container']}`}>
-                            <input type="password" 
+                            <input 
+                                type={ showPassword ? 'text' : 'password'} 
                                 placeholder=" "  
                                 required
                                 id='password'
@@ -68,6 +76,14 @@ const Login = () => {
                                 onChange={e => setPassword(e.target.value)}
                             />
                             <label htmlFor="">Password</label>
+                            <button
+                                type="button"
+                                onClick={togglePasswordVisibility}
+                                className={style.passwordToggle}
+                                aria-label={showPassword ? 'Hide password' : 'Show password'}
+                            >
+                                {showPassword ?  <FontAwesomeIcon  icon={faEyeSlash} /> :  <FontAwesomeIcon  icon={faEye} />}
+                            </button>
                         </div>
                         <div>
                         { error && <div className={style.credentials}><p>Invalid Credentials</p></div> }
@@ -77,7 +93,6 @@ const Login = () => {
                 
                     <div className={style.links}>
                         <a href="">Forgot Password</a>
-                        <a href="">New to this website? Sign Up</a>
                     </div>
                 </div>
             </div>        

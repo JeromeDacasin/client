@@ -74,7 +74,7 @@ const PenaltyPage = () => {
         {
             header: '#',
             accessorKey: 'id',
-            cell: ({row}) => row.index + 1
+            cell: ({row}) => row.index + 1 + (page - 1) * 10
         },
         {
             header: 'FINE',
@@ -137,7 +137,7 @@ const PenaltyPage = () => {
             }
 
             {
-                openModal &&
+                openModal && (action === 'Create' || action === 'Edit' || action === 'Show')  &&
                 <PenaltyForm
                     closeModal={ () => {handleCloseModal()}}
                     action={action}

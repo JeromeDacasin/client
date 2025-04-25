@@ -1,6 +1,6 @@
 
 import { useEffect, useState } from "react";
-import { fetchHolidays } from "../../../api/holidayApi";
+import { deleteHoliday, fetchHolidays } from "../../../api/holidayApi";
 import ManagementTable from "../../common/ManagementTable/ManagementTable";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useLoading } from "../../../hooks/useLoading";
@@ -9,6 +9,7 @@ import useModal from "../../../hooks/useModal";
 import { faEdit, faEye, faTrash } from "@fortawesome/free-solid-svg-icons";
 import { useDebounce } from "../../../hooks/useDebounce";
 import HolidayForm from "./HolidayForm/HolidayForm";
+import DeleteModal from "../../Modal/DeleteModal/DeleteModal";
 
 
 const Holiday = () => {
@@ -26,6 +27,13 @@ const Holiday = () => {
         setSearch(value);
         setPage(1);
     }
+
+    const handleDeleteFromUI = (deletedId) => {
+        setHolidays(prevHolidays => ({
+            ...prevHolidays,
+            data: prevHolidays.data.filter(holiday => holiday.id !== deletedId)
+        }));
+    };
 
      /** @type import('@tanstack/react-table').ColumnDef<any>*/
         const columns = [
@@ -112,6 +120,18 @@ const Holiday = () => {
                         />
                 )
             }
+            {
+                openModal && action === 'Delete' && 
+                (
+                    <DeleteModal 
+                        closeModal={handleCloseModal}
+                        id={id}
+                        onDelete={deleteHoliday}
+                        onUpdate={handleDeleteFromUI}
+                    />
+                )
+            }
+            
                 
         </div>
     )

@@ -3,7 +3,7 @@ import moment from "moment";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { fetchMyHistories } from "../../api/borrowedBooksApi";
 import './MyBooks.css';
-import { faCalendarAlt, faCheckCircle, faClock } from "@fortawesome/free-solid-svg-icons";
+import { faCalendarAlt, faCheckCircle, faClock, faMoneyBillWave, faTimesCircle } from "@fortawesome/free-solid-svg-icons";
 
 const MyBooksPage = () => {
     const [filter, setFilter] = useState("All");
@@ -50,7 +50,6 @@ const MyBooksPage = () => {
                 {filteredBooks.length > 0 ? (
                     filteredBooks.map((book, index) => {
                         const statusClass = book.status.toLowerCase().replace(/\s+/g, "-");
-                        // const formattedStatus = book.status.charAt(0).toUpperCase() + book.status.slice(1).toLowerCase();
                         const isOverdue = book.status === "borrowed" && book.must_return_date < today;
                         
 
@@ -66,7 +65,7 @@ const MyBooksPage = () => {
                             {book.status !== "requested" && (
                                 <p className="date-info">
                                     <FontAwesomeIcon icon={faClock} /> <strong>Must Return By:</strong>{" "}
-                                    {moment(book.must_return_date).format("MMMM D, YYYY")}
+                                    {book.must_return_date ? moment(book.must_return_date).format("MMMM D, YYYY") : '---'}
                                 </p>
                             )}
 
@@ -74,6 +73,21 @@ const MyBooksPage = () => {
                                 <p className="date-info">
                                     <FontAwesomeIcon icon={faCheckCircle} /> <strong>Returned On:</strong>{" "}
                                     {moment(book.returned_date).format("MMMM D, YYYY")}
+                                </p>
+                            )}
+
+                            {book.status === "denied" && book.reason && (
+                                <p className="date-info">
+                                    <FontAwesomeIcon icon={faTimesCircle} /> <strong>Reason:</strong>{" "}
+                                    {book.reason}
+                                </p>
+                            )}
+
+                      
+                            {(book.total_penalty || isOverdue) && (
+                                <p className="date-info">
+                                    <FontAwesomeIcon icon={faMoneyBillWave} /> <strong>Total Penalty:</strong>{" "}
+                                    ₱{book.total_penalty?.toFixed(2) || "0.00"}
                                 </p>
                             )}
 

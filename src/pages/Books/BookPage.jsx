@@ -54,7 +54,7 @@ const BookPage = () => {
         {
             header: 'ID',
             accessorKey: 'id',
-            cell: ({row}) => row.index + 1
+            cell: ({row}) => row.index + 1 + (page - 1) * 10
         },
         {
             header: 'ACQUISITION ID',

@@ -5,6 +5,7 @@ import { createBorrowedBook, updateBorrowedBook } from '../../../api/borrowedBoo
 import Loader from '../../Loader/Loader';
 import { useLoading } from '../../../hooks/useLoading';
 import { showAlertError, showAlertSuccess } from '../../../utils/toastify';
+import { useState } from 'react';
 
 
 
@@ -13,10 +14,11 @@ import { showAlertError, showAlertSuccess } from '../../../utils/toastify';
 const ConfirmationModal = ({closeModal, action, id, onUpdate, message}) => {
     
     const [loading, setLoading] = useLoading();
+    const [reason, setReason] = useState('');
     const actionMap = {
         Request: () => createBorrowedBook({ status: 'requested', book_id: id }),
         Approve: () => updateBorrowedBook({ status: 'borrowed', id }),
-        Deny: () => updateBorrowedBook({ status: 'denied', id }),
+        Deny: () => updateBorrowedBook({ status: 'denied', reason: reason,  id }),
         Return: () => updateBorrowedBook({ status: 'returned', id }),
     };
     
@@ -69,6 +71,19 @@ const ConfirmationModal = ({closeModal, action, id, onUpdate, message}) => {
             <div className={confirmationStyles['confirm-section']}>
 
                 <h4>{message}</h4>
+                {
+                    action === 'Deny' &&
+                    <div>
+                        <input
+                            type="text"
+                            className={confirmationStyles['confirm-reason-input']}
+                            placeholder="Please state a reason"
+                            value={reason}
+                            onChange={(e) => setReason(e.target.value)}
+                        />
+                    </div>
+                }
+                
                 <div className={confirmationStyles['confirm-button']}>
                     <button 
                         type="submit" 

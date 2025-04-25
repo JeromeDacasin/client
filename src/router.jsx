@@ -70,10 +70,6 @@ const router = createBrowserRouter([
                         path: "/faculties",
                         element: <UsersPage roleId={4} title='Faculty'/>,
                     },
-                    // {
-                    //     path: "/penalties",
-                    //     element: <PenaltyPage/>,
-                    // },
                     {
                         path: "/holidays",
                         element: <HolidayPage/>,

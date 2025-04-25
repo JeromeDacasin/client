@@ -7,8 +7,9 @@ import Loader from "../../Loader/Loader";
 import useModal from "../../../hooks/useModal";
 import { faEdit, faEye, faTrash } from "@fortawesome/free-solid-svg-icons";
 import { useDebounce } from "../../../hooks/useDebounce";
-import { fetchBorrowLimits } from "../../../api/borrowLimitApi";
+import { deleteBorrowLimit, fetchBorrowLimits } from "../../../api/borrowLimitApi";
 import BorrowLimitForm from "./BorrowLimitForm/BorrowLimitForm";
+import DeleteModal from "../../Modal/DeleteModal/DeleteModal";
 
 
 
@@ -137,7 +138,7 @@ const BorrowLimit = () => {
                     onUpdate={handleUpdate}
                 />
             }
-             {/* {
+             {
                 openModal && action === 'Delete' && 
                 (
                     <DeleteModal 
@@ -147,7 +148,7 @@ const BorrowLimit = () => {
                         onUpdate={handleDeleteFromUI}
                     />
                 )
-            }  */}
+            } 
         </div>
     )
 }

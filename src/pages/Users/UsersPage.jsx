@@ -129,11 +129,18 @@ const UsersPage = ({roleId, title}) => {
                 const userId = cell.row.original.id
                 return (
                     <div className="actions">
-                        <button className="history" onClick={() =>  { handleOpenModal('History', userId) 
-                            handleUserHistory(userId)
-                        }} title="history">
-                            <FontAwesomeIcon icon={faHistory} />
-                        </button>
+                        {
+                            title != 'Librarian' && (
+                                <button className="history" 
+                                    onClick={() =>  { handleOpenModal('History', userId) 
+                                            handleUserHistory(userId) 
+                                        }}
+                                        title="history">
+                                    <FontAwesomeIcon icon={faHistory} />
+                                </button>
+                            )
+                        }
+                       
                         <button className="edit" onClick={() =>  { handleOpenModal('Edit', userId) }} title="edit">
                             <FontAwesomeIcon icon={faEdit} />
                         </button>
