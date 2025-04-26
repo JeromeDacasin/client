@@ -73,8 +73,11 @@ const Department = () => {
     const columns = [
         {
             header: '#',
-            accessorKey: 'id',
             cell: ({row}) => row.index + 1 + (page - 1) * 10
+        },
+        {
+            header: 'ID',
+            accessorKey: 'id'
         },
         {
             header: 'NAME',

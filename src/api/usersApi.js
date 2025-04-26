@@ -1,4 +1,4 @@
-import api, { headerConfig, viteURI } from "./apiConfig";
+import api, { headerConfig, viteURI, withoutToken } from "./apiConfig";
 
 export const fetchUsers = async payload => {
     const response = await api.get(`${viteURI}/users`, {
@@ -32,5 +32,10 @@ export const deleteUser = async id => {
 
 export const changePassword = async payload => {
     const response = await api.put(`${viteURI}/user/password`, payload, headerConfig);
+    return response.data;
+}
+
+export const forgotPassword = async payload => {
+    const response = await api.post(`${viteURI}/forgot-password`, payload, withoutToken);
     return response.data;
 }

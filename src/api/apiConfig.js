@@ -44,4 +44,10 @@ axiosInstance.interceptors.response.use(
     }
   };
   
+  export const withoutToken = {
+    headers: {
+      'Content-Type': 'application/json',
+    }
+  }
+
   export default axiosInstance;

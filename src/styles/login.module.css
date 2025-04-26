@@ -126,6 +126,12 @@ div .credentials {
     color: #D12324;
 }
 
+div .success-email {
+    text-align: center;
+    margin-bottom: 10px;
+    color: #28a745;
+}
+
 .submit-btn {
     width: 100%;
     padding: 10px;
@@ -158,6 +164,7 @@ div .credentials {
 
 .links a:hover {
     text-decoration: underline;
+    cursor: pointer;
   }
 
 
