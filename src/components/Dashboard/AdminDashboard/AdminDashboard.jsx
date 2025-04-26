@@ -23,6 +23,10 @@ const AdminDashboard = () => {
         return matched ? labelColor[matched] : 'grey';
     }
 
+    const handleCardClick = () => {
+        console.log('dsadsa');
+    }
+
     useEffect(() => {
         const fetchData = async () => {
             try {
@@ -48,25 +52,28 @@ const AdminDashboard = () => {
 
     return (
         <div className="dashboard">
-          { 
-            data.length === 0 ? <Loader/> : (
-
-            data.map((section, id) => (
+            {data.length === 0 ? (
+                <Loader />
+            ) : (
+                data.map((section, id) => (
                 <div key={id} className='report-section'>
                     <h2 className='report-title'>{section.title}</h2>
                     <div className="report-cards">
-                        {section.data.map((item, i) => (
-                            <div key={i} className={`report-card ${item.color}`}>
-                                <div className="report-count">{item.count}</div>
-                                <div className="report-label">{item.label}</div>
-                            </div>
-                        ))}
+                    {section.data.map((item, i) => (
+                        <div 
+                        key={i} 
+                        className={`report-card ${item.color}`}
+                        onClick={() => handleCardClick(section.title, item)} // Add click handler
+                        style={{ cursor: 'pointer' }} // Visual feedback
+                        >
+                        <div className="report-count">{item.count}</div>
+                        <div className="report-label">{item.label}</div>
+                        </div>
+                    ))}
                     </div>
-                    
                 </div>
-            )) 
-            )
-          }
+                ))
+            )}
         </div>
     )
        

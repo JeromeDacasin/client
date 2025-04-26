@@ -114,8 +114,8 @@ const DepartmentForm = ({closeModal, action, id, onUpdate}) => {
                                         >
                                             Submit
                                         </button>
+                                        <button type="submit" className={styles['cancel-btn']} onClick={() => closeModal()}>Cancel</button>
                                     </div>
-                                    
                                 }
                             </form>
                         </div>

@@ -308,10 +308,15 @@ const BookForm = ({ closeModal, id, action, onUpdate }) => {
   </div>
 </div>
 
-    {action !== 'Show' && 
-      <button className="book-btn" type='submit'>
-        Submit
-      </button>
+    {
+    action !== 'Show' && (
+      <div className='btn-bottom'>
+        <button className="book-btn" type='submit'>
+          Submit
+        </button>
+        <button type="submit" className='book-cancel-btn' onClick={() => closeModal()}>Cancel</button>
+      </div>
+    )
     }
   </form>
 </div>

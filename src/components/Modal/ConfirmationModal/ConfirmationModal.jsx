@@ -32,23 +32,6 @@ const ConfirmationModal = ({closeModal, action, id, onUpdate, message}) => {
                 await actionMap[action]();
             } 
 
-            // if (action === 'Request') {
-            //     await createBorrowedBook({status: 'requested', id});
-            // }
-            
-            // if (action === 'Approve') {
-            //     await updateBorrowedBook({status: 'borrowed', id});
-            // }
-    
-            // if (action === 'Deny') {
-            //     await updateBorrowedBook({status: 'denied', id});
-            // }
-
-            // if (action === 'Return') {
-            //     await updateBorrowedBook({status: 'returned', id});
-
-            // }
-
             onUpdate(action, id);
             showAlertSuccess(`Successfully ${action}`)
         } catch (error) {

@@ -98,10 +98,10 @@ const UsersPage = ({roleId, title}) => {
             accessorKey: 'id',
             cell: ({row}) => row.index + 1 + (page - 1) * 10
         },
-        // {
-        //     header: 'USERNAME',
-        //     accessorKey: 'username'
-        // },
+        ...(roleId !== 2 ? [] : [{
+            header: 'STUDENT ID',
+            accessorKey: 'student_number',
+        }]),
         {
             header: 'LASTNAME',
             accessorKey: 'last_name'

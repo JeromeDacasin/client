@@ -27,14 +27,13 @@ const HistoryTableModal = ({ closeModal, id, initialHistory }) => {
         };
     
         fetchData();
-    }, [page, id]);
+    }, [page, id, setLoading]);
 
 
     const columns = [
             {
                 header: '#',
-                accessorKey: 'id',
-                cell: ({row}) => row.index + (page - 1)  * 10
+                cell: ({row}) => row.index + 1 + (page - 1) * 10
             },
             {
                 header: 'FULL NAME',

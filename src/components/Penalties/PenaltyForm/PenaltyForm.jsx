@@ -133,6 +133,7 @@ const PenaltyForm = ({closeModal, action, id, onUpdate}) => {
                                         >
                                             Submit
                                         </button>
+                                        <button type="submit" className={formStyles['cancel-btn']} onClick={() => closeModal()}>Cancel</button>
                                     </div>
                                     
                                 }

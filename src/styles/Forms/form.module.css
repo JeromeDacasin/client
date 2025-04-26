@@ -33,6 +33,7 @@ form .button  {
    display: flex;
    justify-content: center;
    align-items: center;
+   gap: 10px;
 }
 
 form .button .btn {
@@ -48,10 +49,29 @@ form .button .btn {
     font-weight: 500;
 }
 
+form .button .cancel-btn {
+    margin-top: 1.3rem;
+    padding: 0.75rem;
+    width: 45%;
+    border: none;
+    background: #f77066;
+    color: #fff;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background 0.3s ease;
+    font-weight: 500;
+}
+
 form .button .btn:hover {
     background: #4338ca;
     box-shadow: 0px 5px 10px rgba(79, 70, 229, 0.3);
 }
+
+form .button .cancel-btn:hover {
+    background: #f44336;
+    box-shadow: 0px 5px 10px rgba(79, 70, 229, 0.3);
+}
+
 
 form .sample-grouping {
     display: flex;

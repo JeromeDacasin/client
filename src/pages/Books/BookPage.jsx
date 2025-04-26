@@ -1,6 +1,6 @@
 import './books.css';
 import { useEffect, useState } from "react";
-import { deleteBook, fetchBooks, retrieveBook } from "../../api/booksApi";
+import { archiveBook, fetchBooks, retrieveBook } from "../../api/booksApi";
 import { useDebounce } from "../../hooks/useDebounce";
 import { useLoading } from "../../hooks/useLoading";
 import Loader from "../../components/Loader/Loader";
@@ -56,6 +56,10 @@ const BookPage = () => {
             accessorKey: 'id',
             cell: ({row}) => row.index + 1 + (page - 1) * 10
         },
+        ...(!isArchive ? [] : [{
+            header: 'REASON',
+            accessorKey: 'reason',
+        }]),
         {
             header: 'ACQUISITION ID',
             accessorKey: 'acquisition_id',
@@ -273,7 +277,7 @@ const BookPage = () => {
                     <DeleteModal
                         closeModal={handleCloseModal}
                         id={id}
-                        onDelete={deleteBook}
+                        onDelete={archiveBook}
                         onUpdate={handleDeleteFromUI}
                         action={action}
                     />

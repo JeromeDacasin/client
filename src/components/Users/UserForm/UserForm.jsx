@@ -224,6 +224,7 @@ const UserForm = ({closeModal, action, id, onUpdate, title, roleId, userCredenti
                                         >
                                             Submit
                                         </button>
+                                        <button type="submit" className={formStyles['cancel-btn']} onClick={() => closeModal()}>Cancel</button>
                                     </div>
                                     
                                 }

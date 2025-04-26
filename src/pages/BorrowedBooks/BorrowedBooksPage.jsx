@@ -106,6 +106,14 @@ const BorrowedBooksPage = ({roleId, status}) => {
             cell: ({row}) => row.index + 1 + (page - 1) * 10
         },
         {
+            header: 'PERSONNEL',
+            accessorKey: 'personnel',    
+        },
+        {
+            header: 'STUDENT_ID',
+            accessorKey: 'student_id',    
+        },
+        {
             header: 'FULL NAME',
             accessorKey: 'user'
         },
