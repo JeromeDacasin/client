@@ -50,7 +50,6 @@ const BorrowLimitForm = ({closeModal, action, id, onUpdate}) => {
     
         const handleChange = e => {
             const {name, value} = e.target;
-            console.log(name, value)
             setData(prevData => ({
                 ...prevData,
                 [name]: value

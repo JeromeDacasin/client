@@ -113,7 +113,7 @@ const Login = () => {
                                         className={style.passwordToggle}
                                         aria-label={showPassword ? 'Hide password' : 'Show password'}
                                     >
-                                        {showPassword ?  <FontAwesomeIcon  icon={faEyeSlash} /> :  <FontAwesomeIcon  icon={faEye} />}
+                                        {!showPassword ?  <FontAwesomeIcon  icon={faEyeSlash} /> :  <FontAwesomeIcon  icon={faEye} />}
                                     </button>
                                 </div>
                                 <div>

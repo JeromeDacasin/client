@@ -13,7 +13,6 @@ const ImportModal = ({ closeModal }) => {
 
     const handleFileChange = e => {
         setFile(e.target.files[0]);
-        console.log(e)
     }
 
     const handleSubmit = async e => {

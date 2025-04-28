@@ -117,7 +117,7 @@ const Department = () => {
                 (   
                     <div> 
                         {!loading}
-                        <h1>DEPARTMENTS</h1>
+                        <h1>BOOK CATEGORIES</h1>
                         <ManagementTable 
                             title='Department' 
                             data={departments}

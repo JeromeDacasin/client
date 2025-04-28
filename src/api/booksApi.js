@@ -39,7 +39,6 @@ export const retrieveBook = async id => {
 }
 
 export const archiveBook = async (id, reason) => {
-    console.log(reason)
     const response = await api.patch(`${viteURI}/books/${id}/archive`, {reason}, headerConfig);
     return response.data;
 }

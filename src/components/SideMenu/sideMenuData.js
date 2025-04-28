@@ -38,7 +38,7 @@ export const adminMenu = [
         link: '/publishers'
     },
     {
-        title: 'Roles',
+        title: 'Reports',
         icon: faUserGear,
         link: '/roles'
     },

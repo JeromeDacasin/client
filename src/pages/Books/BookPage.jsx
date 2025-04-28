@@ -61,8 +61,12 @@ const BookPage = () => {
             accessorKey: 'reason',
         }]),
         {
-            header: 'ACQUISITION ID',
+            header: 'ISBN',
             accessorKey: 'acquisition_id',
+        },
+        {
+            header: 'COPYRIGHT DATE',
+            accessorKey: 'copyright_date',
         },
         {
             header: 'TITLE',
@@ -95,7 +99,7 @@ const BookPage = () => {
             accessorKey: 'remaining'
         },
         {
-            header: 'DEPARTMENT',
+            header: 'BOOK CATEGORY',
             accessorKey: 'department'
         },
         {

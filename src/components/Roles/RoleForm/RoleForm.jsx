@@ -2,7 +2,7 @@ import modalStyles from './../../../styles/Modals/modals.module.css';
 import formStyles from './../../../styles/Forms/form.module.css';
 import { useLoading } from '../../../hooks/useLoading';
 import Loader from '../../Loader/Loader';
-import { showAlertSuccess } from '../../../utils/toastify';
+import { showAlertError, showAlertSuccess } from '../../../utils/toastify';
 import { useEffect, useState } from 'react';
 import { createRole, fetchRole, updateRole } from '../../../api/roleApi';
 
@@ -32,6 +32,7 @@ const RoleForm = ({closeModal, action, id, onUpdate}) => {
             }
         } catch (error) {
             setLoading(false);
+            showAlertError(error.response.data.message);
             return error;
         } finally {
             closeModal();

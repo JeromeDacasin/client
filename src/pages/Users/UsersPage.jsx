@@ -13,10 +13,12 @@ import DeleteModal from '../../components/Modal/DeleteModal/DeleteModal';
 import ShowUser from '../../components/common/Button/ShowButton/ShowUser';
 import HistoryTableModal from '../../components/Modal/HistoryTableModal/HistoryTableModal';
 import { fetchUserHistory } from '../../api/userHistoryApi';
+import { useAuth } from '../../context/AuthContext';
 
 
 const UsersPage = ({roleId, title}) => {
-
+    
+    const { user } = useAuth();
     const {id, action, openModal, handleOpenModal, handleCloseModal} = useModal();
     const [users, setUsers] = useState(null);
     const [initialLoading, setInitialLoading] = useState(true);
@@ -28,7 +30,6 @@ const UsersPage = ({roleId, title}) => {
     const [visibleModal, setVisibleModal] = useState(false);
     const [history, setHistory] = useState(false);
     let paginate = 1;
-
 
     const handleUpdate = updatedUsers => {
         setUsers( prevData => ({
@@ -140,16 +141,23 @@ const UsersPage = ({roleId, title}) => {
                                 </button>
                             )
                         }
-                       
-                        <button className="edit" onClick={() =>  { handleOpenModal('Edit', userId) }} title="edit">
-                            <FontAwesomeIcon icon={faEdit} />
-                        </button>
+                        {   
+                            user.user === 'Admin' &&
+                            <button className="edit" onClick={() =>  { handleOpenModal('Edit', userId) }} title="edit">
+                              <FontAwesomeIcon icon={faEdit} />
+                           </button>
+                        }
+                        
                         <button className="show" onClick={() =>  { handleOpenModal('Show', userId) }} title="show" >
                             <FontAwesomeIcon icon={faEye} />
                         </button>
-                        <button className="trash" onClick={() => { handleOpenModal('Delete', userId) }} title="delete" >
-                            <FontAwesomeIcon icon={faTrash} />
-                        </button>
+                        {
+                            user.user === 'Admin' &&
+                            <button className="trash" onClick={() => { handleOpenModal('Delete', userId) }} title="delete" >
+                                <FontAwesomeIcon icon={faTrash} />
+                            </button>
+                        }
+                        
                     </div>
                 )
             }

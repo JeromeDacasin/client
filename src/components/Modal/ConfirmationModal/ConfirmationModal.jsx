@@ -8,9 +8,6 @@ import { showAlertError, showAlertSuccess } from '../../../utils/toastify';
 import { useState } from 'react';
 
 
-
-
-
 const ConfirmationModal = ({closeModal, action, id, onUpdate, message}) => {
     
     const [loading, setLoading] = useLoading();

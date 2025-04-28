@@ -4,7 +4,6 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEdit, faEye, faTrash, faCheckCircle, faXmarkCircle } from "@fortawesome/free-solid-svg-icons";
 import BookModal from "../BookModal/BookModal";
 import { useState } from "react";
-// import { useData } from "../../../context/DataContext";
 import DeleteModal from "../../Modal/DeleteModal/DeleteModal";
 import Table from "../../Table/Table";
 

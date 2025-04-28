@@ -1,5 +1,5 @@
 
-import { showAlertSuccess } from '../../../utils/toastify';
+import { showAlertError, showAlertSuccess } from '../../../utils/toastify';
 import './DeleteModal.css';
 import { useLoading } from '../../../hooks/useLoading';
 import Loader from '../../Loader/Loader';
@@ -18,7 +18,7 @@ const DeleteModal = ({closeModal, id, onDelete, onUpdate, action = null}) => {
             onUpdate(id);
             showAlertSuccess(response.message)
         } catch (error) {
-            return error
+            showAlertError(error.response.data.message)
         } finally {
             closeModal()
             setLoading(false)

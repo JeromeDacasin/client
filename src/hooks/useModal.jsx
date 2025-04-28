@@ -9,7 +9,6 @@ const useModal = () => {
         setId(id);
         setAction(action);
         setOpenModal(true);
-        console.log(action)
     }
 
     const handleCloseModal = () => {
