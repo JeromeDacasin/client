@@ -9,3 +9,13 @@ export const dashboardReport = async () => {
     return response.data;
 };
 
+export const fetchBorrowerReport = async (payload) => {
+
+    const { to, from, page} = payload;
+
+    const response = await api.get(`${viteURI}/dashboards/borrowers?from=${from}&to=${to}&page=${page}`, {
+        ...headerConfig
+    });
+
+    return response.data;
+};

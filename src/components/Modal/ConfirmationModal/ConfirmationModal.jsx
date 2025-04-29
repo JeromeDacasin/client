@@ -17,6 +17,7 @@ const ConfirmationModal = ({closeModal, action, id, onUpdate, message}) => {
         Approve: () => updateBorrowedBook({ status: 'borrowed', id }),
         Deny: () => updateBorrowedBook({ status: 'denied', reason: reason,  id }),
         Return: () => updateBorrowedBook({ status: 'returned', id }),
+        Reserved: () => createBorrowedBook({status: 'reserved', book_id: id})
     };
     
     const handleSubmit = async () => {

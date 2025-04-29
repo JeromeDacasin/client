@@ -1,4 +1,4 @@
-import { faHouse, faBook, faFolderTree, faUserPen, faGraduationCap, faChalkboardTeacher, faBookOpen, faScroll, faSync, faPencilAlt, faUserGear, faGear  } from "@fortawesome/free-solid-svg-icons"
+import { faHouse, faBook, faFolderTree, faUserPen, faGraduationCap, faChalkboardTeacher, faBookOpen, faScroll, faSync, faPencilAlt, faUserGear, faGear, faFileAlt  } from "@fortawesome/free-solid-svg-icons"
 
 export const adminMenu = [
     {
@@ -39,8 +39,8 @@ export const adminMenu = [
     },
     {
         title: 'Reports',
-        icon: faUserGear,
-        link: '/roles'
+        icon: faFileAlt,
+        link: '/reports'
     },
     // {
     //     title: 'Fines',

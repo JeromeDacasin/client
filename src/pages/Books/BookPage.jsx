@@ -25,11 +25,12 @@ const BookPage = () => {
     const [loading, setLoading] = useLoading();
     const [search, setSearch] = useState(null);
     const [initialLoading, setInitialLoading] = useState(true);
+    const [message, setMessage] = useState('');
     const debounceSearch = useDebounce(search, 1000);
     const [page, setPage] = useState(1);
     const [isArchive, setIsArchive] = useState(false);
     const isLibrarianOrAdmin = ['Librarian', 'Admin'].includes(user.user);
-    const message = 'Do you want to borrow this book ?'; 
+    
 
     const handleUpdateBook = (updatedBook) => {
         setBooks(prevBooks => ({
@@ -63,6 +64,10 @@ const BookPage = () => {
         {
             header: 'ISBN',
             accessorKey: 'acquisition_id',
+        },
+        {
+            header: 'ACQUIRED VIA',
+            accessorKey: 'acquired_via',
         },
         {
             header: 'COPYRIGHT DATE',
@@ -124,11 +129,28 @@ const BookPage = () => {
             header: 'ACTION',
             cell: cell => {
                 const bookId = cell.row.original.id;
+                const remaining = cell.row.original.remaining;
+                console.log(remaining);
                 return (
                     <div className="actions">
                         {   
                             !isArchive &&
-                            <button title="request" className="edit" onClick={() =>  { handleOpenModal('Request', bookId) }}>
+                            <button title="request" className="edit" 
+                                onClick={() =>  { 
+                                    
+                                    let message, actionType;
+  
+                                    if (remaining == 0) {
+                                        message = 'No available copies right now. Would you like to place a reservation?';
+                                        actionType = 'Reserved'; 
+                                    } else {
+                                        message = 'Do you want to borrow this book?';
+                                        actionType = 'Request'; 
+                                    }
+                                    
+                                    setMessage(message);
+                                    handleOpenModal(actionType, bookId);
+                                }}>
                               <FontAwesomeIcon icon={faExchangeAlt}/>
                           </button>
                         }
@@ -264,7 +286,7 @@ const BookPage = () => {
                 )
             }
             {
-                openModal && action === 'Request' && (
+                openModal && (action === 'Request' || action === 'Reserved') && (
                     <ConfirmationModal 
                         closeModal={handleCloseModal}
                         action={action}

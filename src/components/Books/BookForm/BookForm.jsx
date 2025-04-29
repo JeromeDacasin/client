@@ -209,17 +209,24 @@ const BookForm = ({ closeModal, id, action, onUpdate }) => {
     </div>
     
     <div className='book-form-group book-inline-inputs'>
-    <div className='book-input-container'>
-      <label htmlFor="acquired_via">Acquired Via</label>
-      <input 
-        name="acquired_via"
-        className="book-input"
-        onChange={handleChange}
-        value={data.acquired_via}
-        type="text"
-        disabled={edit}
-        placeholder="Enter Acquisition Method"
-      />
+      <div className='book-input-container'>
+        <label htmlFor="acquired_via">Acquired Via</label>
+        <select
+          name="acquired_via"
+          className="book-input"
+          onChange={handleChange}
+          value={data.acquired_via}
+          disabled={edit}
+        >
+          <option value="" disabled>Select Acquisition Method</option>
+          <option value="Donations">Donations</option>
+          <option value="Purchase">Purchase</option>
+          <option value="Exchange">Exchange</option>
+          <option value="Legal Deposit">Legal Deposit</option>
+          <option value="Subscription">Subscription</option>
+          <option value="Grants">Grants</option>
+          <option value="Sponsorships">Sponsorships</option>
+        </select>
     </div>
 
     <div className='book-input-container'>

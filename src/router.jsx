@@ -17,6 +17,7 @@ import RolePage from "./pages/Roles/RolePage";
 import MyBooksPage from "./pages/MyBooks/MyBooks";
 import HolidayPage from "./components/Settings/Holidays/Holiday";
 import SettingPage from "./pages/Settings/SettingPage";
+import ReportsPage from "./pages/Reports/ReportsPage";
 
 const router = createBrowserRouter([
     {
@@ -79,8 +80,8 @@ const router = createBrowserRouter([
                         element: <SettingPage/>
                     },
                     {
-                        path: "/roles",
-                        element: <RolePage/>,
+                        path: "/reports",
+                        element: <ReportsPage/>,
                     },
                     {
                         path: "/publishers",
